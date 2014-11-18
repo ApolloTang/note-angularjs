@@ -34,16 +34,22 @@
             };
 
             $scope.currentAirport = null;
+            $scope.airportToEdit = null;
 
-            $scope.sidebarURL = '08-partial--airportDetail.html';
+            $scope.sidebarURL = '07-partial--airportDetail.html';
+            $scope.airportDetailForm = '07-partial--airportDetail-form.html';
 
             $scope.setAirport = function (code){
                 $scope.currentAirport = $scope.airports[code];
+                $scope.airportToEdit = null;
+            };
+
+            $scope.editAirport = function (code){
+                $scope.airportToEdit = $scope.airports[code];
             };
         }
 
         angular.module('airline', ['ngRoute']).config(airlineRouter);
-        //  see the following link regarding loading router for version 1.2.26
         //  http://stackoverflow.com/questions/18481863/failed-to-instantiate-module-injectorunpr-unknown-provider-routeprovider
 
         function airlineRouter($routeProvider){
@@ -51,6 +57,8 @@
                 .when('/', {templateUrl: '08-partial--destinations.html'})
                 .when('/flights', {template: '<h3>Flights</h3>'})
                 .when('/reservations', {template: '<h3>Your Reservations</h3>'});
+
+
         }
     </script>
 

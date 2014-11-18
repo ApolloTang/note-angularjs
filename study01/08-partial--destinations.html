@@ -1,4 +1,4 @@
-<div class="pull-left span6">
+<div>
 	<h3>All Destinations</h3>
 	<ul>
 		<li ng-repeat="airport in airports">
@@ -6,5 +6,5 @@
 		</li>
 	</ul>
 </div>
-<div class="span5" ng-include src="sidebarURL"></div>
+<div  ng-show="currentAirport" ng-include src="sidebarURL" style="border:5px green solid;"></div>
 
