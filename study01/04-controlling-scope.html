@@ -1,0 +1,72 @@
+<html ng-app>
+<head>
+    <title>02-very-simple-controler</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-resource-1.2.26.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+</head>
+<body>
+    <script type="text/javascript">
+        function AppCtrl ($scope) {
+            $scope.airports = {
+                "PDX": {
+                    "code": "PDX",
+                    "name": "Portland International Airport",
+                    "city": "Portland",
+                    "destinations": [
+                        "LAX",
+                        "SFO"
+                    ]
+                    },
+                        "STL": {
+                        "code": "STL",
+                        "name": "Lambert-St. Louis International Airport",
+                        "city": "St. Louis",
+                        "destinations": [
+                            "LAX",
+                            "MKE"
+                        ]
+                        },
+                        "MCI": {
+                            "code": "MCI",
+                            "name": "Kansas City International Airport",
+                            "city": "Kansas City",
+                            "destinations": [
+                                "LAX",
+                                "DFW"
+                            ]
+                        }
+            };
+
+            $scope.currentAirport = null;
+
+            $scope.setAirport = function (code){
+                $scope.currentAirport = $scope.airports[code];
+            }
+        }
+    </script>
+
+    <div class="container" ng-controller="AppCtrl">
+        <ul ng-repeat="airport in airports" >
+            <li>
+                <a href="" ng-click="setAirport(airport.code)">{{airport.city }}</a>
+                    <!--
+                        the different between ng-click and onClick
+                        is that ng-click will look for the event
+                        handler in the $scope, while onClick will look
+                        for a global function
+                    -->
+            </li>
+        </ul>
+
+        <p ng-show="currentAirport">Current airport: {{currentAirport.name}}</p>
+
+
+        <!--
+            ng-show evaluate the variable  "currentAirport" if it is null, undefined, or false
+            it will hide the html tag
+        -->
+    </div>
+</body>
+</html>

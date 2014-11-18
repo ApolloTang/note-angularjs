@@ -1,0 +1,78 @@
+<html ng-app>
+<head>
+    <title>05-including-partial</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-resource-1.2.26.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+</head>
+<body>
+    <script type="text/javascript">
+        function AppCtrl ($scope) {
+            $scope.airports = {
+                "PDX": {
+                    "code": "PDX",
+                    "name": "Portland International Airport",
+                    "city": "Portland",
+                    "destinations": [
+                        "LAX",
+                        "SFO"
+                    ]
+                },
+                "STL": {
+                    "code": "STL",
+                    "name": "Lambert-St. Louis International Airport",
+                    "city": "St. Louis",
+                    "destinations": [
+                        "LAX",
+                        "MKE"
+                    ]
+                },
+                "MCI": {
+                    "code": "MCI",
+                    "name": "Kansas City International Airport",
+                    "city": "Kansas City",
+                    "destinations": [
+                        "LAX",
+                        "DFW"
+                    ]
+                }
+            };
+
+            $scope.currentAirport = null;
+            $scope.airportToEdit = null;
+
+            $scope.sidebarURL = '06-partial-airportDetail.html';
+            $scope.airportDetailForm = '06-partial-airportDetial-form.html';
+
+            $scope.setAirport = function (code){
+                $scope.currentAirport = $scope.airports[code];
+                $scope.airportToEdit = null;
+            };
+
+            $scope.editAirport = function (code){
+                $scope.airportToEdit = $scope.airports[code];
+            };
+
+        }
+    </script>
+
+    <div class="container" ng-controller="AppCtrl">
+        <ul  >
+            <li ng-repeat="airport in airports">
+                <a href="" ng-click="setAirport(airport.code)">{{airport.city }}</a>
+                <a href="" ng-click="editAirport(airport.code)">edit</a>
+            </li>
+        </ul>
+        <div style="border:5px solid red">
+            <div ng-include src="sidebarURL"></div>
+        </div>
+        <div style="border:5px solid green">
+            <div ng-include src="airportDetailForm"></div>
+        </div>
+
+        <!--
+        -->
+    </div>
+</body>
+</html>

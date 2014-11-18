@@ -1,0 +1,73 @@
+<html ng-app>
+<head>
+    <title>05-including-partial</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-resource-1.2.26.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+</head>
+<body>
+    <script type="text/javascript">
+        function AppCtrl ($scope) {
+            $scope.airports = {
+                "PDX": {
+                    "code": "PDX",
+                    "name": "Portland International Airport",
+                    "city": "Portland",
+                    "destinations": [
+                        "LAX",
+                        "SFO"
+                    ]
+                },
+                "STL": {
+                    "code": "STL",
+                    "name": "Lambert-St. Louis International Airport",
+                    "city": "St. Louis",
+                    "destinations": [
+                        "LAX",
+                        "MKE"
+                    ]
+                },
+                "MCI": {
+                    "code": "MCI",
+                    "name": "Kansas City International Airport",
+                    "city": "Kansas City",
+                    "destinations": [
+                        "LAX",
+                        "DFW"
+                    ]
+                }
+            };
+
+            $scope.currentAirport = null;
+
+            $scope.setAirport = function (code){
+                $scope.currentAirport = $scope.airports[code];
+            };
+
+            $scope.sidebarURL = '05-partial.html';
+        }
+    </script>
+
+    <div class="container" ng-controller="AppCtrl">
+        <ul ng-repeat="airport in airports" >
+            <li>
+                <a href="" ng-click="setAirport(airport.code)">{{airport.city }}</a>
+            </li>
+        </ul>
+
+        <div ng-include src="sidebarURL" style="border:1px solid red">kkkk</div>
+        <ng-include src="sidebarURL" style="border:1px solid blue">kkkk</ng-include>
+        <!--
+            Partial provide a way to saperate markup into reuseable pieces.
+            This partial are imported by directive "ng-include". In the same tag
+            where "ng-include" is declared you can specify URL resource of you partial
+            in "src" attribute.
+
+            Instead of using "ng-include" directive, you can
+            also use "<ng-include>" tag, which is the same, however, this would not
+            work in earlier IE browser
+        -->
+    </div>
+</body>
+</html>

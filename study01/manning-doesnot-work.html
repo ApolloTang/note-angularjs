@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Demo</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-resource-1.2.26.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+</head>
+<body ng-app="helloApp">
+    <div ng-controller="HelloCtrl">
+        <p>{{greeting}} {{person}}</p>
+        <input ng-model="person">
+    </div>
+    <script>
+angular.module('helloApp')
+.controller('HelloCtrl', function ($scope) {
+    $scope.greeting = 'Hello';
+    $scope.person = 'World';
+});
+    </script>
+</body>
+</html>

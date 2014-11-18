@@ -1,0 +1,71 @@
+<html ng-app="airline">
+<head>
+    <title>05-including-partial</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-resource-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-route-1.2.26.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+</head>
+<body>
+    <script type="text/javascript">
+    function AppCtrl ($scope) {
+            $scope.airports = {
+                "PDX": {
+                    "code": "PDX",
+                    "name": "Portland International Airport",
+                    "city": "Portland",
+                    "destinations": [ "LAX", "SFO" ]
+                },
+                "STL": {
+                    "code": "STL",
+                    "name": "Lambert-St. Louis International Airport",
+                    "city": "St. Louis",
+                    "destinations": [ "LAX", "MKE"
+                    ]
+                },
+                "MCI": {
+                    "code": "MCI",
+                    "name": "Kansas City International Airport",
+                    "city": "Kansas City",
+                    "destinations": [ "LAX", "DFW"
+                    ]
+                }
+            };
+
+            $scope.currentAirport = null;
+            $scope.airportToEdit = null;
+
+            $scope.sidebarURL = '07-partial--airportDetail.html';
+            $scope.airportDetailForm = '07-partial--airportDetail-form.html';
+
+            $scope.setAirport = function (code){
+                $scope.currentAirport = $scope.airports[code];
+                $scope.airportToEdit = null;
+            };
+
+            $scope.editAirport = function (code){
+                $scope.airportToEdit = $scope.airports[code];
+            };
+        }
+
+        angular.module('airline', ['ngRoute']).config(airlineRouter);
+        //  http://stackoverflow.com/questions/18481863/failed-to-instantiate-module-injectorunpr-unknown-provider-routeprovider
+
+        function airlineRouter($routeProvider){
+            $routeProvider
+                .when('/', {templateUrl: '08-partial--destinations.html'})
+                .when('/flights', {template: '<h3>Flights</h3>'})
+                .when('/reservations', {template: '<h3>Your Reservations</h3>'});
+
+
+        }
+    </script>
+
+    <div class="container" ng-controller="AppCtrl">
+
+        <div ng-view style="border: 5px red solid;"></div>
+
+    </div>
+</body>
+</html>
