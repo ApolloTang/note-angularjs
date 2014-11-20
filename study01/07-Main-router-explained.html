@@ -1,6 +1,6 @@
 <html ng-app="airline">
 <head>
-    <title>07</title>
+    <title>07-Main-router-explained</title>
     <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
     <script type="text/javascript" src="js/lib/angular-resource-1.2.26.js"></script>
     <script type="text/javascript" src="js/lib/angular-route-1.2.26.js"></script>
@@ -21,32 +21,24 @@
                     "code": "STL",
                     "name": "Lambert-St. Louis International Airport",
                     "city": "St. Louis",
-                    "destinations": [ "LAX", "MKE"
-                    ]
+                    "destinations": [ "LAX", "MKE" ]
                 },
                 "MCI": {
                     "code": "MCI",
                     "name": "Kansas City International Airport",
                     "city": "Kansas City",
-                    "destinations": [ "LAX", "DFW"
-                    ]
+                    "destinations": [ "LAX", "DFW" ]
                 }
             };
 
             $scope.currentAirport = null;
-            $scope.airportToEdit = null;
 
             $scope.sidebarURL = '07-partial--airportDetail.html';
-            $scope.airportDetailForm = '07-partial--airportDetail-form.html';
 
             $scope.setAirport = function (code){
                 $scope.currentAirport = $scope.airports[code];
-                $scope.airportToEdit = null;
             };
 
-            $scope.editAirport = function (code){
-                $scope.airportToEdit = $scope.airports[code];
-            };
         }
 
         angular.module('airline', ['ngRoute']).config(airlineRouter);
@@ -56,30 +48,27 @@
             $routeProvider
                 .when('/', {templateUrl: '07-partial--destinations-via-router.html'});
                  // this template will load when you navigate to
-                 //     localhost:8170/study01/07-Main-simple-edit-model-view.html#/
+                 //     localhost:xxxx/07-Main-simple-edit-model-view.html#/
         }
     </script>
 
     <div class="container" ng-controller="AppCtrl">
-        <ul  >
-            <li ng-repeat="airport in airports">
-                <a href="" ng-click="setAirport(airport.code)">{{airport.city }}</a>
-                <a href="" ng-click="editAirport(airport.code)">edit</a>
-            </li>
-        </ul>
-        <div style="border:5px solid red">
-            <div ng-include src="sidebarURL"></div>
-        </div>
-        <div style="border:5px solid green">
-            <div ng-include src="airportDetailForm"></div>
-        </div>
+
         <div ng-view style="border: 5px blue solid;">
             <!--
                 templateUrl in airlineRouter($...).when() get place in here
+                sidebarURL will get append after
             -->
         </div>
-        <!--
-        -->
+
+        <div style="border:5px solid red">
+            <div ng-include src="sidebarURL">
+                <!--
+                    sidebarURL is display again here
+                -->
+            </div>
+        </div>
+
     </div>
 </body>
 </html>
