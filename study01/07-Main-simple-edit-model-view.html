@@ -1,6 +1,6 @@
 <html ng-app="airline">
 <head>
-    <title>05-including-partial</title>
+    <title>07</title>
     <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
     <script type="text/javascript" src="js/lib/angular-resource-1.2.26.js"></script>
     <script type="text/javascript" src="js/lib/angular-route-1.2.26.js"></script>
@@ -54,8 +54,9 @@
 
         function airlineRouter($routeProvider){
             $routeProvider
-                .when('/', {templateUrl: '07-partial--destinations.html'});
-
+                .when('/', {templateUrl: '07-partial--destinations-via-router.html'});
+                 // this template will load when you navigate to
+                 //     localhost:8170/study01/07-Main-simple-edit-model-view.html#/
         }
     </script>
 

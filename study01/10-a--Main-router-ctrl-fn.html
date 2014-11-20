@@ -1,0 +1,79 @@
+<html ng-app="airline">
+<head>
+    <title>09-Main-router-n-nav</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-resource-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-route-1.2.26.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+</head>
+<body>
+<script type="text/javascript">
+    // this demo required two external files:
+        // 09-partial--airportDetail.html
+        // 09-partial--destinations.html
+
+    // ---->  Application Controler  <---- //
+
+        function AppCtrl ($scope) {
+            $scope.airports = {
+                "PDX": { "code": "PDX", "name": "Portland International Airport", "city": "Portland", "destinations": [ "LAX", "SFO" ] },
+                "STL": { "code": "STL", "name": "Lambert-St. Louis International Airport", "city": "St. Louis", "destinations": [ "LAX", "MKE" ] },
+                "MCI": { "code": "MCI", "name": "Kansas City International Airport", "city": "Kansas City", "destinations": [ "LAX", "DFW" ] }
+            };
+
+            $scope.currentAirport = null;
+            $scope.sidebarURL     = '09-partial--airportDetail.html';
+            $scope.setAirport     = function (code){ $scope.currentAirport = $scope.airports[code]; };
+
+
+            // set ng-class
+
+                $scope.setActive = function (type) {
+                    console.log('ng-class')
+                    $scope.destinationsActive = '';
+                    $scope.flightsActive      = '';
+                    $scope.reservationsActive = '';
+                    $scope[type + 'Active'] = 'active';
+                }
+        } // End :: AppCtrl
+
+
+
+    // ---->  Requiring Module  <---- //
+
+        angular.module('airline', ['ngRoute']).config(airlineRouter);
+
+        function airlineRouter($routeProvider){
+            $routeProvider
+                .when('/',             { templateUrl: '09-partial--destinations.html'
+                                       , controller : function ($scope) { $scope.setActive('destinations'); }
+                                       })
+                .when('/flights',      { template   : '<h3>Flights</h3>'
+                                       , controller: function ($scope) { $scope.setActive('flights'); }  // <--- inline router ctrl fn
+                                       })
+                .when('/reservations', { template   : '<h3>Your Reservations</h3>'
+                                       , controller: 'ReservationsCtrl'    // <---- name of router controller function
+                                       })
+        } // End :: fn airlineRouter
+
+
+    // ----> Controler function used in router <---- //
+
+        function ReservationsCtrl ($scope) { $scope.setActive('reservations'); }
+
+</script>
+
+	<div class="container" ng-controller="AppCtrl">
+
+        <ul class="nav nav-pills">
+            <li ng-class="destinationsActive"> <a href="#">Destinations</a> </li>
+            <li ng-class="flightsActive"> <a href="#/flights">Flights</a> </li>
+            <li ng-class="reservationsActive"> <a href="#/reservations">Reservations</a> </li>
+        </ul>
+
+        <div ng-view style="border: 5px red solid;"></div>
+
+    </div>
+</body>
+</html>

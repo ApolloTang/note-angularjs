@@ -1,0 +1,10 @@
+<div>
+	<h3>All Destinations</h3>
+	<ul>
+		<li ng-repeat="airport in airports">
+			<a href="" ng-click="setAirport(airport.code)">{{airport.code}} - {{airport.city}}</a>
+		</li>
+	</ul>
+</div>
+<div  ng-show="currentAirport" ng-include src="sidebarURL" style="border:5px green solid;"></div>
+
