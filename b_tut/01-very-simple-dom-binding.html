@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app>
+<!--
+    'ng-app' will tell angular to instantiate itself on the page
+-->
+<head>
+    <title>?????</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-resource-1.2.26.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+</head>
+<body>
+<div>
+    <label>Message:</label>
+    <input
+        type="text"
+        ng-model="messsage"
+        placeholder="Enter a message here">
+    <label>Mame:</label>
+    <input
+        type="text"
+        ng-model="yourName"
+        placeholder="Enter a name here">
+    <hr>
+    <h3> {{messsage}} {{yourName}}!</h3>
+</div>
+</body>
+</html>

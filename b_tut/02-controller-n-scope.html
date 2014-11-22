@@ -1,0 +1,54 @@
+<!doctype html>
+<html ng-app>
+<head>
+    <title>?????</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-resource-1.2.26.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+</head>
+<body>
+
+
+    <!-- This is the view for controller "Ctrl_1" -->
+
+        <div ng-controller="Ctrl_1">
+            <input ng-model="variable_1">
+            <p>{{variable_2}}</p>
+        </div>
+
+        <hr>
+
+
+    <!-- This is the view for controller "Ctrl_2" -->
+
+        <div ng-controller="Ctrl_2">
+
+            <input ng-model="variable_1">
+
+            <!-- ealuating expression in template -->
+            <p>{{variable_2 * 100}}</p>
+
+        </div>
+
+<script>
+
+    // The following is the controller for view with attribute
+    // ng-controller="Ctrl_1"
+
+        var Ctrl_1 = function($scope) {
+           $scope.variable_1 = "a";
+           $scope.variable_2 = "b";
+        }
+
+
+    // The following is the controller for view with attribute
+    // ng-controller="Ctrl_2"
+
+        var Ctrl_2 = function($scope) {
+           $scope.variable_1 = "1";
+           $scope.variable_2 = "2";
+        }
+</script>
+</body>
+</html>

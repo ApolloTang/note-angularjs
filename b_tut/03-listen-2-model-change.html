@@ -1,0 +1,31 @@
+<!doctype html>
+<html ng-app>
+<head>
+    <title>?????</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-resource-1.2.26.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+</head>
+<body>
+
+    <!-- This is the view for controller "Ctrl_1" -->
+
+        <div ng-controller="Ctrl_1">
+            <input ng-model="variable_1">
+        </div>
+
+        <hr>
+
+<script>
+
+        var Ctrl_1 = function($scope) {
+           $scope.variable_1 = "a";
+           $scope.$watch('variable_1', function(){
+                console.log ('variable_1 change to :', $scope.variable_1 );
+           })
+        }
+
+</script>
+</body>
+</html>
