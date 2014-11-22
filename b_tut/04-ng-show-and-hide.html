@@ -1,0 +1,26 @@
+<!doctype html>
+<html ng-app>
+<head>
+    <title>?????</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-resource-1.2.26.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+</head>
+<body>
+
+    <input type="checkbox" ng-model="checked"><label>show?</label>
+
+    <div ng-show="checked">
+        <p>value of checked is: {{checked}}</p>
+        <p>shown</p>
+    </div>
+
+    <div ng-hide="checked">
+        <p>value of checked is: {{checked}}</p>
+        <p>hidden</p>
+    </div>
+
+<script> </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<!--
+
+    video : EasierJSAngular-06.mov
+
+-->
+<html ng-app>
+<head>
+    <title>?????</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <!-- <script type="text/javascript" src="js/lib/angular&#45;resource&#45;1.2.26.js"></script> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap&#45;theme.css" /> -->
+</head>
+<body>
+
+    <div>
+        <input type="search" ng-model="search_me">
+    </div>
+
+    <div ng-controller="List">
+        <ul>
+            <li ng-repeat="person in people | filter:search_me">{{person.name}}: {{person.age}}</li>
+        </ul>
+    </dir>
+
+<script>
+var List = function($scope){
+    $scope.people = [
+          {name: 'John'   , age: 20}
+        , {name: 'Micheal', age: 30}
+        , {name: 'Dan'    , age: 40}
+        , {name: 'Merry'  , age: 50}
+    ];
+}
+</script>
+</body>
+</html>
+
