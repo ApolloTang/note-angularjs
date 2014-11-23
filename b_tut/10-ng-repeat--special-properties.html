@@ -1,0 +1,76 @@
+<!doctype html>
+<!--
+
+    video : EasierJSAngular-07.mov  ()
+
+-->
+<html ng-app>
+<head>
+    <title>?????</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <!-- <script type="text/javascript" src="js/lib/angular&#45;resource&#45;1.2.26.js"></script> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap&#45;theme.css" /> -->
+    <style>
+        .first-true {background-color: #afe;}
+    </style>
+</head>
+<body>
+
+    <div>
+        <!--
+            note that the following div is outside ng-controller='List', but it's scope is still
+            available in ng-controller="List" because it is in the global scope.
+            The global scope is also called the *root* scope
+        -->
+        <input type="search" ng-model="search_me">
+    </div>
+
+    <div ng-controller="List">
+        <ul>
+            <li ng-repeat="person in people | filter:search_me" class="first-{{$first}}">
+                {{person.name}}: {{person.age}}
+                <button ng-click="remove($index);">x</button>
+                <span ng-show="$first">first {{$first}}</span>
+                <span ng-show="$middle">middle {{$middle}}</span>
+                <span ng-show="$last">last {{$last}}</span>
+            </li>
+        </ul>
+
+        <div>
+            <label>Name:</label><input ng-model="new_name">
+            <br>
+            <label>Age:</label><input ng-model="new_age">
+            <br>
+            <button ng-click="add()">Add</button>
+        </div>
+    </dir>
+
+<script>
+var List = function($scope){
+    $scope.people = [
+          {name: 'John'   , age: 20}
+        , {name: 'Micheal', age: 30}
+        , {name: 'Dan'    , age: 40}
+        , {name: 'Merry'  , age: 50}
+    ];
+
+    $scope.add = function(){
+        $scope.people.push({
+            name: $scope.new_name
+            , age: $scope.new_age
+        });
+        $scope.new_name = "";
+        $scope.new_age = "";
+    };
+
+    $scope.remove = function(index) {
+        console.log(index);
+        $scope.people.splice(index, 1);
+    }
+
+}
+</script>
+</body>
+</html>
+

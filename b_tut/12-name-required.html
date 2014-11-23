@@ -1,0 +1,48 @@
+<!doctype html>
+<!--
+
+    video : EasierJSAngular-08.mov  ()
+
+-->
+<html ng-app>
+<head>
+    <title>?????</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <!-- <script type="text/javascript" src="js/lib/angular&#45;resource&#45;1.2.26.js"></script> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap&#45;theme.css" /> -->
+    <style>
+        * {padding:0; margin:0}
+        * { box-sizing: border-box; }
+        body { font: 16px/1.5 sans-serif; color: #222;}
+        .browser { box-shadow: 3px 10px 29px 4px rgba(50, 50, 50, 0.5); width: 90%; margin: 5% 5%;}
+        .url {background:#eee; padding: 0.444em 0.5em; }
+        .url input {width: 85%;}
+        .url label {display: inline-block; width: 14%; font-size: 0.677em;}
+        .page { border: 1px solid #eee; padding:2.5em; min-height: 15em;}
+        .page input {width: 100%;}
+    </style>
+</head>
+<body>
+
+<div class="browser" ng-controller="Browser">
+
+    <div class="url">
+        <label for="url">&larr; &rarr; &infin;</label>
+        <input value="edit">
+    </div>
+
+    <div class="page">
+        <label>Update the url:</label>
+        <input ng-model="path">
+    </div>
+
+</div>
+
+
+
+<script>
+</script>
+</body>
+</html>
+
