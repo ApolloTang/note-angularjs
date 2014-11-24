@@ -1,0 +1,49 @@
+<!doctype html>
+<!--
+
+    video : EasierJSAngular-08.mov  (3:59)
+
+-->
+<html ng-app>
+<head>
+    <title>?????</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <!-- <script type="text/javascript" src="js/lib/angular&#45;resource&#45;1.2.26.js"></script> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap&#45;theme.css" /> -->
+    <style>
+    </style>
+</head>
+<body>
+    <!-- drop down or select box -->
+
+<div ng-controller="Contacts">
+    <label>filter option in dropdown: <input type="search" ng-model="my_search">
+        <select ng-model="selected_person"
+                ng-options="person.name for person in people | filter:my_search">
+        <option value=""> Choose a person: </option>
+    </select>
+    {{selected_person.name}}
+
+    <hr>
+
+    <div>
+        <label>Name:</label><input ng-model="selected_person.name"><br>
+        <label>Number:</label><input ng-model="selected_person.number">
+    </div>
+</div>
+
+
+
+<script>
+var Contacts = function($scope){
+    $scope.people = [
+          { name: 'John'    , number: '4338705' }
+        , { name: 'Michale' , number: '8438491' }
+        , { name: 'Peter'   , number: '3847932' }
+    ]
+}
+</script>
+</body>
+</html>
+

@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
 
-    video : EasierJSAngular-08.mov  ()
+    video : EasierJSAngular-08.mov  (2:00)
 
 -->
 <html ng-app>
@@ -18,7 +18,7 @@
         .browser { box-shadow: 3px 10px 29px 4px rgba(50, 50, 50, 0.5); width: 90%; margin: 5% 5%;}
         .url {background:#eee; padding: 0.444em 0.5em; }
         .url input {width: 85%;}
-        .url label {display: inline-block; width: 14%; font-size: 0.677em;}
+        .url label {display: inline-block; width: 14%; text-align:center; font-size: 0.677em;}
         .page { border: 1px solid #eee; padding:2.5em; min-height: 15em;}
         .page input {width: 100%;}
     </style>
@@ -29,12 +29,12 @@
 
     <div class="url">
         <label for="url">&larr; &rarr; &infin;</label>
-        <input value="edit">
+        <input value="edit/{{path}}">
     </div>
 
     <div class="page">
         <label>Update the url:</label>
-        <input ng-model="path">
+        <input ng-change="clean()" ng-model="path">
     </div>
 
 </div>
@@ -42,6 +42,13 @@
 
 
 <script>
+var Browser = function($scope){
+    $scope.clean = function(){
+        $scope.path = $scope.path
+            .replace(/\s+/, '-')
+            .replace(/[^a-z0-9-]/i, '');
+    }
+}
 </script>
 </body>
 </html>
