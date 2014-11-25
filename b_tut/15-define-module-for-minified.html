@@ -1,0 +1,41 @@
+<!doctype html>
+<!--
+
+    video : EasierJSAngular-10.mov  (5:50)
+    video : EasierJSAngular-9.mov  ()
+
+-->
+<html ng-app="myApp">
+<head>
+    <title>?????</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <!-- <script type="text/javascript" src="js/lib/angular&#45;resource&#45;1.2.26.js"></script> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap&#45;theme.css" /> -->
+    <style>
+    </style>
+</head>
+<body>
+
+    <div ng-controller="myCtrl"> {{name}} </div>
+
+    <script>
+
+        angular.module('myApp', [])
+        .controller(
+            "myCtrl"
+            , ['$scope', function(s){ s.name ="Tom"; }]
+        );
+
+        // the above is same as below but allow for minification
+
+        // angular.module('myApp', [])
+        // .controller(
+        //     "myCtrl"
+        //     , function($scope){ $scope.name ="Apollo"; }
+        // );
+    </script>
+
+</body>
+</html>
+
