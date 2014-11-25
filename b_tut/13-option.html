@@ -19,6 +19,12 @@
 
 <div ng-controller="Contacts">
     <label>filter option in dropdown: <input type="search" ng-model="my_search">
+        <!--
+            The selected item from the option is saved in the model (ng-model).
+            Note that the 'ng-options' has similar syntax to ng-repeat,
+            and the filter will hide unmatch items in the option, also very similar to example
+            with ng-repeat
+        -->
         <select ng-model="selected_person"
                 ng-options="person.name for person in people | filter:my_search">
         <option value=""> Choose a person: </option>
