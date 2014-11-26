@@ -52,6 +52,11 @@
                     templateUrl: '17-partial--edit.html'
                     , controller: 'Add'
                 })
+                 // Add contact
+                .when('/delete/:myIndex', {
+                      templateUrl: '17-partial--edit.html'
+                    , controller: 'Delete'
+                })
                 // Lists all contacts
                 .when('/', {
                     templateUrl: '17-partial--list.html'
@@ -83,6 +88,12 @@
                 });
             $scope.contact = $scope.contacts[lengthOf_contacts - 1];
             $scope.index = lengthOf_contacts - 1 ;
+        })
+        .controller( "Delete" , function( $scope, $routeParams
+                    , $location  // <---- [!]
+        ){
+            $scope.contacts.splice($routeParams.index, 1);
+            $location.path('/').replace();
         });
     </script>
 
