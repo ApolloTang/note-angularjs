@@ -1,0 +1,73 @@
+<!doctype html>
+<!--
+
+    video : EasierJSAngular-11.mov  (1:08)
+
+-->
+<html ng-app="contacts">
+<head>
+    <title>?????</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-route-1.2.26.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+
+    <div ng-controller="Contacts">
+        <!--
+            ng-controller="Contacts" is the parent controller
+            of ng-view
+        -->
+        <h1>Contacts</h1>
+        <div ng-view>
+
+            <!--
+                ng-view is the child controller of ng-controller="Contacts"
+                in <div ng-view> is the child scope
+            -->
+
+        </div>
+    </div>
+
+    <script>
+
+        angular.module('contacts', ['ngRoute'])
+        //  http://stackoverflow.com/questions/18481863/failed-to-instantiate-module-injectorunpr-unknown-provider-routeprovider
+        .config(function($routeProvider){
+            $routeProvider
+                // Edit contact
+                .when('/contact/:index', {
+                    templateUrl: '17-partial--edit.html'
+                    , controller: 'Edit'
+                })
+                // Add contact
+                .when('/add', {
+                    // Note that this route use the same
+                    templateUrl: '17-partial--edit.html'
+                    , controller: 'Add'
+                })
+                .when('/', {
+                    templateUrl: '16-partial--list.html'
+                });
+        })
+        .controller( "Contacts" , function($scope){
+            // Contacts is the parrent controller, so
+            // $scope.contacts is availbale in all children
+            $scope.contacts = [
+                  { name: 'John'    , number: '4338705' }
+                , { name: 'Michale' , number: '8438491' }
+                , { name: 'Peter'   , number: '3847932' }
+            ];
+        })
+        .controller( "Edit" , function($scope, $routeParams){
+            // Load in a contact from the route (/contact/:index)
+            $scope.contact = $scope.contacts[$routeParams.index];
+            $scope.index = $routeParams.index;
+        });
+
+    </script>
+
+</body>
+</html>
+
