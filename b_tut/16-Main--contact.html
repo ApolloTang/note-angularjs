@@ -23,12 +23,8 @@
         <div ng-view>
 
             <!--
-                ng-view is the region where $routeProvider inject its template
-
-                the controller for ng-view is the child controller of
-                ng-controller="Contacts", it has access to scope
-                in Contacts controller. (However, it can not modify the scope of
-                'Contacts' controller.
+                ng-view is the child controller of ng-controller="Contacts"
+                in <div ng-view> is the child scope
             -->
 
         </div>
@@ -41,15 +37,12 @@
         .config(function($routeProvider){
             $routeProvider
                 // Edit contact
-                .when('/contact/:myIndex', { // <--- "myIndex" is available in "Edit" controller as $routeParams.myIndex
-                    templateUrl: '16-partial--edit.html'  // <--- this template will be inject into 'ng-view'
+                .when('/contact/:index', {
+                    templateUrl: '16-partial--edit.html'
                     , controller: 'Edit'
                 })
-                // Lists all contacts
                 .when('/', {
                     templateUrl: '16-partial--list.html'
-                    // We don't need a controller for root '/' because
-                    // it is default to the 'Contacts' controller
                 });
         })
         .controller( "Contacts" , function($scope){
@@ -61,13 +54,10 @@
                 , { name: 'Peter'   , number: '3847932' }
             ];
         })
-        .controller( "Edit" , function(
-                    $scope            // <-- the parent controller's scope
-                    , $routeParams    // <-- router's scope
-        ){
-            // Load in a contact from the route (/contact/:myIndex)
-            $scope.contact = $scope.contacts[$routeParams.myIndex];
-            $scope.index = $routeParams.myIndex;
+        .controller( "Edit" , function($scope, $routeParams){
+            // Load in a contact from the route (/contact/:index)
+            $scope.contact = $scope.contacts[$routeParams.index];
+            $scope.index = $routeParams.index;
         });
 
     </script>
