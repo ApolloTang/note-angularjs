@@ -19,7 +19,7 @@
     <div ng-controller="a"> {{name}} </div>
     <script>
         var a = function(b) { b.name = "Tom"; };
-        a.$inject = ['$scope'];
+        a.$inject = ['$scope'];  // <------------ note the property $inject
     </script>
 
     <!--
