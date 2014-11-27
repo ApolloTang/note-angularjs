@@ -91,10 +91,11 @@
             $scope.index = lengthOf_contacts - 1 ;
         })
         .controller( "Delete" , function( $scope, $routeParams
-                    , $location  // <---- [!]
+                    , $location  // <---- // this service let you modify URL
         ){
             $scope.contacts.splice($routeParams.myIndex, 1);
-            $location.path('/').replace();
+            $location.path('/') // <--- load root view
+                .replace();     // <---
         });
     </script>
 
