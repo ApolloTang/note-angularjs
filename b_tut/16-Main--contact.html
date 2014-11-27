@@ -67,6 +67,9 @@
         ){
             // Load in a contact from the route (/contact/:myIndex)
             $scope.contact = $scope.contacts[$routeParams.myIndex];
+                                    //  ^----- contacts belongs to "Contacts" controller
+                                    //         but it is available in this scope because
+                                    //         "Contacts" controller is the parent scope.
             $scope.index = $routeParams.myIndex;
         });
 
