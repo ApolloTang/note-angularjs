@@ -72,6 +72,7 @@
                 , { name: 'Michale' , number: '8438491' }
                 , { name: 'Peter'   , number: '3847932' }
             ];
+            window.s = $scope;
         })
         .controller( "Edit" , function(
                     $scope            // <-- the parent controller's scope
@@ -92,7 +93,7 @@
         .controller( "Delete" , function( $scope, $routeParams
                     , $location  // <---- [!]
         ){
-            $scope.contacts.splice($routeParams.index, 1);
+            $scope.contacts.splice($routeParams.myIndex, 1);
             $location.path('/').replace();
         });
     </script>
