@@ -95,7 +95,12 @@
         ){
             $scope.contacts.splice($routeParams.myIndex, 1);
             $location.path('/') // <--- load root view
-                .replace();     // <---
+                // .replace();
+                // Unlike suggestion in the tutorial, I am not using replace()
+                // This is becaue replace() will register the
+                // deleted page in browser's history, and if you navigate
+                // back with back button the '#/contact/:myIndex' will point
+                // to a different contact which is undesireable
         });
     </script>
 
