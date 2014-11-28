@@ -1,0 +1,63 @@
+<!doctype html>
+<!--
+
+    video : EasierJSAngular-13.mov  ()
+
+-->
+<html ng-app>
+<head>
+    <title>?????</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-route-1.2.26.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+
+    <div ng-controller="Filter">
+        <ul>
+            <li>{{price | currency:'£'}}</li>
+            <li>{{amount | number:1}}</li>
+            <li>{{amount | number:2}}</li>
+            <li>{{amount | number:3}}</li>
+            <li>{{message | uppercase}}</li>
+            <li>{{message | lowercase}}</li>
+            <li>{{date | date:'yyyy MM dd' }}</li>
+            <li>{{date | date:'yyyy-MM-dd' }}</li>
+            <li>{{}}</li>
+        </ul>
+        <ul>
+            <li ng-repeat="name in names | limitTo:2 ">{{name}}</li>
+        </ul>
+        <ul>
+            <li ng-repeat="name in names">{{name | limitTo:2}}</li>
+        </ul>
+        <ul>
+            <li ng-repeat="person in people | orderBy:'firstname'">{{person.firstname}} {{person.lastname}}</li>
+        </ul>
+        <ul>
+            <li ng-repeat="person in people | orderBy:'firstname':reverse">{{person.firstname}} {{person.lastname}}</li>
+            <!--
+                reverse does not work ?
+            -->
+        </ul>
+    </div>
+
+    <script>
+        var Filter = function($scope){
+            $scope.price = 11.50;
+            $scope.amount = 10.135465346 ;
+            $scope.message = "Hello, world!";
+            $scope.date = new Date() ;
+            $scope.names = ["Tom", 'Laura', 'Zoe', 'Jeffrey'];
+            $scope.people = [
+                { firstname: "Tom", lastname: "Ashworth" }
+                , { firstname: "Jeffrey", lastname: "Way" }
+                , { firstname: "Joe", lastname: "Bloggs" }
+                ];
+        };
+    </script>
+
+</body>
+</html>
+
