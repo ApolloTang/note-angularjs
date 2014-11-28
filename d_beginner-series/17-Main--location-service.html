@@ -1,0 +1,109 @@
+<!doctype html>
+<!--
+
+    video : EasierJSAngular-12.mov  ()
+
+-->
+<html ng-app="contacts">
+<head>
+    <title>?????</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-route-1.2.26.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+
+    <div ng-controller="Contacts">
+        <!--
+            ng-controller="Contacts" is the parent controller
+            of ng-view
+        -->
+        <h1>Contacts</h1>
+        <div ng-view>
+
+            <!--
+                ng-view is the region where $routeProvider inject its template
+
+                the controller for ng-view is the child controller of
+                ng-controller="Contacts", it has access to scope
+                in Contacts controller. (However, it can not modify the scope of
+                'Contacts' controller.
+            -->
+
+        </div>
+    </div>
+
+    <script>
+
+        angular.module('contacts', ['ngRoute'])
+        //  http://stackoverflow.com/questions/18481863/failed-to-instantiate-module-injectorunpr-unknown-provider-routeprovider
+        .config(function($routeProvider){
+            $routeProvider
+                // Edit contact
+                .when('/contact/:myIndex', { // <--- "myIndex" is available in "Edit" controller as $routeParams.myIndex
+                    templateUrl: '17-partial--edit.html'  // <--- this template will be inject into 'ng-view'
+                    , controller: 'Edit'
+                })
+                // Add contact
+                .when('/add', {
+                    // Note that this route uses the same template as '/contact/:index
+                    // However, their controller are different
+                    templateUrl: '17-partial--edit.html'
+                    , controller: 'Add'
+                })
+                 // Add contact
+                .when('/delete/:myIndex', {
+                      templateUrl: '17-partial--edit.html'
+                    , controller: 'Delete'
+                })
+                // Lists all contacts
+                .when('/', {
+                    templateUrl: '17-partial--list.html'
+                    // We don't need a controller for root '/' because
+                    // it is default to the 'Contacts' controller
+                });
+        })
+        .controller( "Contacts" , function($scope){
+            // Contacts is the parrent controller, so
+            // $scope.contacts is availbale in all children
+            $scope.contacts = [
+                  { name: 'John'    , number: '4338705' }
+                , { name: 'Michale' , number: '8438491' }
+                , { name: 'Peter'   , number: '3847932' }
+            ];
+            window.s = $scope;
+        })
+        .controller( "Edit" , function(
+                    $scope            // <-- the parent controller's scope
+                    , $routeParams    // <-- router's scope
+        ){
+            // Load in a contact from the route (/contact/:myIndex)
+            $scope.contact = $scope.contacts[$routeParams.myIndex];
+            $scope.index = $routeParams.myIndex;
+        })
+        .controller( "Add" , function( $scope, $routeParams ){
+            var lengthOf_contacts = $scope.contacts.push({
+                      name: 'New contact'
+                    , number: ''
+                });
+            $scope.contact = $scope.contacts[lengthOf_contacts - 1];
+            $scope.index = lengthOf_contacts - 1 ;
+        })
+        .controller( "Delete" , function( $scope, $routeParams
+                    , $location  // <---- // this service let you modify URL
+        ){
+            $scope.contacts.splice($routeParams.myIndex, 1);
+            $location.path('/') // <--- load root view
+                // .replace();
+                // Unlike suggestion in the tutorial, I am not using replace()
+                // This is becaue replace() will register the
+                // deleted page in browser's history, and if you navigate
+                // back with back button the '#/contact/:myIndex' will point
+                // to a different contact which is undesireable
+        });
+    </script>
+
+</body>
+</html>
+
