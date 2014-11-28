@@ -1,0 +1,42 @@
+<!doctype html>
+<!--
+
+    video : EasierJSAngular-14.mov  ()
+
+-->
+<html ng-app="myApp">
+<head>
+    <title>?????</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <script type="text/javascript" src="js/lib/angular-route-1.2.26.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+
+    <div ng-controller="Filter">
+        <p>{{text | clean}}</p>
+        <p>{{text | clean:''}}</p>
+        <p>{{text | clean:'*'}}</p>
+        <p>{{text | clean:' '}}</p>
+    </div>
+
+    <script>
+        angular.module('myApp', [])
+        .filter('clean', function(){
+            return function(input, delimiter){
+                var re = new RegExp('[^a-z0-9' + (delimiter || '-') +']', 'ig');
+                return input.toLowerCase()
+                            .replace(/\s+/g, (delimiter || '-'))
+                            .replace(re, '');
+            }
+         })
+        .controller('Filter', function($scope){
+            $scope.text = "Hello word, this is some text!";
+        });
+
+    </script>
+
+</body>
+</html>
+
