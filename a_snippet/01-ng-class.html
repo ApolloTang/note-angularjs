@@ -1,0 +1,65 @@
+<html ng-app="myApp">
+<head>
+    <title>$location.path('/').replace()</title>
+    <script type="text/javascript" src="js/lib/angular-1.2.26.js"></script>
+    <!-- <script type="text/javascript" src="js/lib/angular&#45;resource&#45;1.2.26.js"></script> -->
+    <script type="text/javascript" src="js/lib/angular-route-1.2.26.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+</head>
+<body>
+<script type="text/javascript">
+
+    // >>>  Application Controler  <<< //
+
+        function AppCtrl ($scope) {
+            $scope.setActive = function( currentPage ) {
+                $scope.nav_root = "";
+                $scope.nav_pg1   = "";
+                $scope['nav_' + currentPage] = 'active';
+                console.log('in setActive', currentPage, $scope['nav_' + currentPage] );
+            }
+        } // End :: AppCtrl
+
+    // >>>  Requiring Module  <<< //
+
+        angular.module('myApp', ['ngRoute']).config(myRouter);
+
+        function myRouter($routeProvider){
+            $routeProvider
+                .when('/',            { template    : '<h3>root</h3>'
+                                      , controller  : 'ctrl_home'         })
+                .when('/p1',          { template    : '<h3>page 1</h3><a href="#/doSomething">doSomthing</a>'
+                                      , controller  : 'ctrl_pg1'          })
+                .when('/doSomething',  { template    : '<h3>doSomthing page</h3><a href="#/">root</a>'
+                                      , controller  : 'ctrl_doSomthing'   });
+        } // End :: fn myRouter
+
+
+    // >>> Controler function used in router <<< //
+
+        function ctrl_home ($scope) {
+            $scope.setActive('root');
+        };
+        function ctrl_pg1 ($scope) {
+            $scope.setActive('pg1');
+        };
+        function ctrl_doSomthing ($scope, $location) {
+            console.log('in ctrl_doSomthing')
+            $location.path('/')  // <---- this will navigate to route
+            .replace();          // <---- without replace history will not work
+        }
+
+</script>
+	<div class="container" ng-controller="AppCtrl">
+
+        <ul class="nav nav-pills">
+            <li> <a ng-class="nav_root" href="#"    >root</a> </li>
+            <li> <a ng-class="nav_pg1"   href="#/p1" >p1</a> </li>
+        </ul>
+
+        <div ng-view style="border: 5px blue solid;"> </div>
+
+    </div>
+</body>
+</html>
