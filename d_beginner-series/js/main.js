@@ -18,5 +18,5 @@ app.controller('HomeController', function( $scope ){
 });
 
 app.controller('settingController', function( $scope ) {
-    $scope.name="apollo";
+    $scope.settings={};
 });
