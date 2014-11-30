@@ -13,10 +13,10 @@ app.config(function($routeProvider){
     .otherwise({ redirecTo: '/' });
 });
 
-app.controller('HomeController', function(){
+app.controller('HomeController', function( $scope ){
 
 });
 
-app.controller('settingController', function() {
-
+app.controller('settingController', function( $scope ) {
+    $scope.name="apollo";
 });
