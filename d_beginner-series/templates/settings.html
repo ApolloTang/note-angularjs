@@ -3,6 +3,7 @@
     <form name="form">
         <fieldset>
             <legend>Update settings</legend>
+
             <div class="row">
                 <div class="small-8 columns">
                     <label>Name</lable>
@@ -12,6 +13,36 @@
                            ng-model="settings.name">
                 </div>
             </div>
+
+            <div class="row">
+                <div class="small-8 columns">
+                    <label>Email</lable>
+                    <input type="text"
+                           placeholder="Email"
+                           name="email"
+                           ng-model="settings.email">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="small-8 columns">
+                    <label>Age</lable>
+                    <input type="text"
+                           placeholder="Age"
+                           name="age"
+                           ng-model="settings.age">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="push-9 small-3">
+                    <button type="submit" class="button">
+                        Update
+                    </button>
+                </div>
+            </div>
+
+
         </fieldset>
     </form>
 </div>
