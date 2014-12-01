@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="contacts">
+    <!--
+        EasierJSAngular-18.mov  (2:48)
+    -->
     <meta charset="utf-8">
     <title>Contacts</title>
     <meta name="viewport" content="width=device-width">
@@ -40,6 +43,12 @@
         angular.module('contacts', ['ngRoute','ngResource'])
         .controller("Contacts", function($scope, $resource) {
             var Contact = $resource('/api/contact');
+
+            window.contact= Contact;
+
+            var promise = Contact.query(function(){
+                debugger;
+            });
             $scope.contacts = [];
         });
     </script>
