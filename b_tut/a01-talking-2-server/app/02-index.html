@@ -43,13 +43,14 @@
         angular.module('contacts', ['ngRoute','ngResource'])
         .controller("Contacts", function($scope, $resource) {
 
-            var Contact = $resource('/api/contact/:name');
+            var Contact = $resource('/api/contact');
 
+            window.Contact = Contact
             // var promise = Contact.query(function(){
             //     debugger;
             // });
 
-            $scope.contacts = Contact.query();
+            // $scope.contacts = Contact.query();
 
             window.contact= Contact;
         });

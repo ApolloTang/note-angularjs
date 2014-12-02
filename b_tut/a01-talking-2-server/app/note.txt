@@ -1,0 +1,11 @@
+$mongo
+>show dbs
+>use angular-resource
+>show collections
+>db.contacts.insert({
+    name: {first:'apollo', last:'tang'}
+    , email: "tang.apollo@gmail.com"
+    , number: 1234567898
+})
+db.contacts.find()
+
