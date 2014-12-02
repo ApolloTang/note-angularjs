@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="contacts">
     <!--
-        EasierJSAngular-18.mov  (6.13)
+        EasierJSAngular-18.mov  (3.52)
     -->
     <meta charset="utf-8">
     <title>Contacts</title>
@@ -46,12 +46,28 @@
             var Contact = $resource('/api/contact');
 
             window.Contact = Contact
-            // var promise = Contact.query(function(){
-            //     debugger;
-            // });
 
-            // $scope.contacts = Contact.query();
 
-            window.contact= Contact;
+            /*
+            Terminal
+
+                $mongo
+                >show dbs
+                >use angular-resource
+                >show collections
+                >db.contacts.insert({
+                    name: {first:'apollo', last:'tang'}
+                    , email: "tang.apollo@gmail.com"
+                    , number: 1234567898
+                })
+                db.contacts.find()
+
+            chrome inspector:
+
+                var contacts = Contact.query(function(){ console.log(contacts)} )
+
+
+            */
+
         });
     </script>
