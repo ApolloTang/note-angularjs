@@ -20,8 +20,8 @@ db.contacts.find()
 var contacts = Contact.query(function(){ console.log(contacts)} )
 
 >db.contacts.insert({
-    name: {first:'Adam', last:'Way'}
-    , email: "way.Adam@gmail.com"
+    name: {first:'Adam', last:'Way', clean:'adam-way'}
+    , email: "way.adam@gmail.com"
     , number:12458754
 });
 
