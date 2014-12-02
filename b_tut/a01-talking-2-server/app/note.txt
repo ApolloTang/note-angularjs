@@ -1,3 +1,11 @@
+Note on Mongo and mongoose
+==========================
+
+https://www.youtube.com/watch?v=4fQsDiioj3I
+https://code.tutsplus.com/tutorials/getting-started-with-mongodb-part-1--net-22879
+http://docs.mongodb.org/manual/reference/mongo-shell/
+
+
 $mongo
 >show dbs
 >use angular-resource
@@ -8,4 +16,12 @@ $mongo
     , number: 1234567898
 })
 db.contacts.find()
+
+var contacts = Contact.query(function(){ console.log(contacts)} )
+
+>db.contacts.insert({
+    name: {first:'Adam', last:'Way'}
+    , email: "way.Adam@gmail.com"
+    , number:12458754
+});
 
