@@ -10,27 +10,45 @@
                     <input type="text"
                            placeholder="Name"
                            name="name"
-                           ng-model="settings.name">
+                           ng-model="settings.name"
+                           ng-minlength=3   note="only populate the model if text lenght > 3"
+                           ng-maxlength=20  note="only populate the model if text length < 20"
+                           ng-pattern="/^[a-zA-Z+$]/"
+                           required         note="this is HTML5 attriute for non optional field" >
+                    <div ng-show="form.name.$dirty && form.name.$invalid"
+                         note=" $dirty == true, if form has changed. this prevent error msg to show up initially when form is empty">
+                         <div ng-show="form.name.$error.required">Your name is required</div>
+                         <div ng-show="form.name.$error.minlength">Your name must be at least 3 charactors</div>
+                         <div ng-show="form.name.$error.maxlength">Your name can not be greater then 20 charactors</div>
+                    </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="small-8 columns">
                     <label>Email</lable>
-                    <input type="text"
+                    <input type="email"  note="use email type form"
                            placeholder="Email"
                            name="email"
                            ng-model="settings.email">
+                     <div ng-show="form.email.$dirty && form.email.$invalid">
+                         <div ng-show="form.email.$error.email">Email is invalid</div>
+                    </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="small-8 columns">
                     <label>Age</lable>
-                    <input type="text"
+                    <input type="number"  note = "use number type"
                            placeholder="Age"
                            name="age"
-                           ng-model="settings.age">
+                           ng-model="settings.age"
+                           min=3 max=199 note = "html5 validation attribute" />
+                     <div ng-show="form.age.$dirty && form.age.$invalid">
+                         <div ng-show="form.age.$error.min">mininum age is 3</div>
+                         <div ng-show="form.age.$error.max">maximum age is 199</div>
+                    </div>
                 </div>
             </div>
 
@@ -41,7 +59,7 @@
                     </button>
                 </div>
             </div>
-
+            {{setting}}
 
         </fieldset>
     </form>
