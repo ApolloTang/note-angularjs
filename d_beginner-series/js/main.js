@@ -17,6 +17,21 @@ app.controller('HomeController', function( $scope ){
 
 });
 
+app.controller('MailListingController', function( $scope ){
+    // some mock data
+    $scope.email = [{
+        'id': 1
+        , 'from': 'apollo@gmail.com'
+        , 'to': 'fred@gmail.com'
+        , 'subject': 'Hello'
+        , 'body': 'How are you? '
+    }]
+});
+
+app.controller('ContentController', function( $scope ){
+
+});
+
 app.controller('settingController', function( $scope ) {
     $scope.settings={
         name: 'some default name'
