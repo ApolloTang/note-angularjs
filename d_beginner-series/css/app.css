@@ -7,6 +7,7 @@
 .ng-invalid.ng-dirty {border: 1px solid yellow;}
 .ng-valid.ng-dirty {border: 1px solid green;}
 input.ng-invalid-minlength.ng-dirty {border: 2px solid blue;}
+form button[type=submit]:disabled {background-color: #aaa;}
 
 
 
