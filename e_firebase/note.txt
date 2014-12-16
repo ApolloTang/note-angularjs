@@ -14,3 +14,21 @@
         -- save will save firebase as a configuration in bower.jsons
 
     run $ grunt serve again firebase will be included in index.html
+
+::: video-1.4 ::  02:45
+
+    // the following [1] and [2] are equivalent:
+        [1]
+        var rootRef = new Firebase('https://fiery-fire-8387.firebaseio.com/message');
+
+        [2]
+        var rootRef = new Firebase('https://fiery-fire-8387.firebaseio.com/');
+        rootRef.child('message');
+
+    // more eg:
+
+    var rootRef = new Firebase('https://fiery-fire-8387.firebaseio.com/');
+    var childRef = rootRef.child('message');
+    var parentRef = childRef.parent();
+
+
