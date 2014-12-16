@@ -13,12 +13,20 @@ angular.module('14StructuringDataApp')
   .controller('MainCtrl', function ($scope) {
 
     var rootRef = new Firebase('https://fiery-fire-8387.firebaseio.com/');
+    var childRef = rootRef.child('message');
 
     // https://fiery-fire-8387.firebaseio.com/message
     $scope.setMessage = function(){
-        rootRef.child('message').set({
+        childRef.set({
             user: 'Bob'
             , text: 'Hi'
+        });
+    };
+
+    // https://fiery-fire-8387.firebaseio.com/message
+    $scope.updateMessage = function(){
+        childRef.update({
+            text: 'Bye'
         });
     };
   });
