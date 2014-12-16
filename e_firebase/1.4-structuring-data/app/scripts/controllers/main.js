@@ -23,10 +23,14 @@ angular.module('14StructuringDataApp')
         });
     };
 
-    // https://fiery-fire-8387.firebaseio.com/message
     $scope.updateMessage = function(){
         childRef.update({
             text: 'Bye'
         });
     };
+
+    $scope.deleteMessage = function(){
+        childRef.remove();
+    };
+
   });
