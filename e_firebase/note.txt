@@ -1,0 +1,16 @@
+1.3 01:11
+
+    $ npm install -g generator-angular
+
+    $ yo angular
+
+
+1.3 6:25
+
+    $ grunt serve
+
+    $ bower install firebase --save
+
+        -- save will save firebase as a configuration in bower.jsons
+
+    run $ grunt serve again firebase will be included in index.html
