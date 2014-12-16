@@ -1,7 +1,14 @@
 <div class="small-4 columns" ng-controller="MailListingController">
     <h2>Sidebar</h2>
-    <ul>
-        <li ng-repeat="(id, mail) in email"></li>
+    <ul id="emailListing">
+        <li ng-repeat="mail in email">
+            <div class="small-4 columns">{{mail.from}}</div>
+            <div class="small-2 columns">{{mail.subject}}</div>
+        </li>
+        <!--
+          the follwoing is another express for ng-repeat
+          <li ng-repeat="(key, value) in email"></li>
+        -->
     </ul>
 </div>
 
