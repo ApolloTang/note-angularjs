@@ -1,4 +1,7 @@
 9:00
 20:55
 
-
+current at 54:27
+    missing bunch of code for css
+    floading left div in li is weird
+    missing server side code
