@@ -14,9 +14,19 @@ angular.module('14StructuringDataApp')
 
     var rootRef = new Firebase('https://fiery-fire-8387.firebaseio.com/');
     var messagesRef = rootRef.child('messages');
+    var titleRef = rootRef.child('title');
 
+    $scope.title = null;
     $scope.currentUser = null;
     $scope.currentText = null;
+
+    titleRef.on('value', function(snapshot){
+        $timeout(function(){
+            $scope.title = snapshot.val();
+            console.log('value changed');
+            titleRef.off();
+        });
+    });
 
     // And becuse "child_added" return item one at a time you will
     // have to reconstruct the collection locally because
