@@ -32,7 +32,6 @@ angular.module('14StructuringDataApp')
         $timeout(function(){
             $scope.title = snapshot.val();
             console.log('value changed');
-            titleRef.off();
         });
     });
 
