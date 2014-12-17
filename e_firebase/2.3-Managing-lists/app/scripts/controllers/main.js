@@ -111,4 +111,10 @@ angular.module('14StructuringDataApp')
         // push() is different from set() in that you item is assigned a unique key
     };
 
+
+    $scope.turnFeedOff = function() {
+        console.log('turnFeedOff');
+        messagesRef.off();
+    };
+
   });
