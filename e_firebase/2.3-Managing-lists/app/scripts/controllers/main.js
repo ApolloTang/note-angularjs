@@ -52,10 +52,21 @@ angular.module('14StructuringDataApp')
     messagesRef.on('child_changed', function( snapshot ){
         $timeout(function(){
             var snapshotVal = snapshot.val();
-            var message = findMessageByName(snapshot.key());
             // console.log('&& child_changed: ', snapshot.name());  // <-- name() is deprecated
             console.log('&& child_changed, key: ', snapshot.key());
+
+            var message = findMessageByName(snapshot.key());
             console.log('&& child_changed, message: ', message);
+            // Object {text: "dsf", user: "fdsaf", name: "-JdNzlBP8yIn7jlzw2Ef", $$hashKey: "object:3"}
+            // Note the above console.log message item "$$hashkey":
+                // This property is used as a key to associated
+                // DOM elements with the corresponding item in
+                // the array by identity. Moving the same object
+                // in array would move the DOM element in the
+                // same way in the DOM.
+                // [ref]: https://docs.angularjs.org/api/ng/directive/ngRepeat
+            var newText = snapshotVal.text;
+            message.text = newText;
         }, 0);
     });
 
