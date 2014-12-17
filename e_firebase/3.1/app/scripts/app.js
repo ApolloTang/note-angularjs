@@ -32,4 +32,6 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  .constant('FBURL', 'https://brilliant-fire-2753.firebaseio.com/');
+

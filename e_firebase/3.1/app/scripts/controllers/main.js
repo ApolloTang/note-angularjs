@@ -9,8 +9,9 @@
  * # MainCtrl
  * Controller of the 14StructuringDataApp
  */
+
 angular.module('14StructuringDataApp')
-  .controller('MainCtrl', function ($scope, $timeout) {
+  .controller('MainCtrl', function ($scope, $timeout, MessageService) {
 
     var rootRef = new Firebase('https://fiery-fire-8387.firebaseio.com/');
     var messagesRef = rootRef.child('messages');
@@ -35,6 +36,10 @@ angular.module('14StructuringDataApp')
         });
     });
 
+
+    MessageService.childAdded(function(addedChild){
+        console.log('MessageService.childAdded: ', addedChild);
+    });
     // And becuse "child_added" return item one at a time you will
     // have to reconstruct the collection locally because
     // ng-repeat work with collection (which we will do next)
