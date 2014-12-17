@@ -50,31 +50,6 @@ angular.module('14StructuringDataApp')
     // ng-repeat work with collection (which we will do next)
     $scope.messages = [];
 
-    // messagesRef.on('child_added', function( snapshot ){
-    //     // with "child_added", entire collection is fetched
-    //     // during the first "initialize". And during this first
-    //     // "initialize" collection items are received
-    //     // one item at a time (in onValue it is receive as a json
-    //     // with items nested within). After the initial fetch
-    //     // snapshot will only return newly added item.
-    //     //
-    //     // [!] Remember "on" event will fire on each browser
-    //     // that connects to firebase, if firebase return the
-    //     // entire collection when a single item is added
-    //     // you will get an expansive bill at the end of the month.
-    //     //
-    //     $timeout(function(){
-    //         var snapshotVal = snapshot.val();
-    //         console.log('** child_added: ', snapshotVal);
-    //         // $scope.messages.push(snapshotVal);
-    //         $scope.messages.push({
-    //               text: snapshotVal.text
-    //             , user: snapshotVal.user
-    //             // , name: snapshot.name()  // <-- name() is deprecated
-    //             , name: snapshot.key()
-    //         });
-    //     }, 0);
-    // });
 
     messagesRef.on('child_changed', function( snapshot ){
         $timeout(function(){
