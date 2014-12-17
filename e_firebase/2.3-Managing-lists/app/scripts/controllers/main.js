@@ -52,21 +52,35 @@ angular.module('14StructuringDataApp')
     messagesRef.on('child_changed', function( snapshot ){
         $timeout(function(){
             var snapshotVal = snapshot.val();
+            var message = findMessageByName(snapshot.key());
             // console.log('&& child_changed: ', snapshot.name());  // <-- name() is deprecated
-            console.log('&& child_changed: ', snapshot.key());
+            console.log('&& child_changed, key: ', snapshot.key());
+            console.log('&& child_changed, message: ', message);
         }, 0);
     });
 
+    function findMessageByName(name) {
+        var messageFound = null;
+        var i=0;
+        for (; i < $scope.messages.length; i++ ) {
+            var currentMessage = $scope.messages[i];
+            if (currentMessage.name === name) {
+                messageFound = currentMessage;
+                break;
+            }
+        }
+        return messageFound;
+    }
 
     $scope.sendMessage = function(){
         var newMessage = {
             user: $scope.currentUser
             , text: $scope.currentText
-        }
+        };
 
         messagesRef.push(newMessage);
         // when using set() you have to name your key
         // push() is different from set() in that you item is assigned a unique key
-    }
+    };
 
   });
