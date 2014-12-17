@@ -33,5 +33,4 @@ angular
         redirectTo: '/'
       });
   })
-  .constant('FBURL', 'https://brilliant-fire-2753.firebaseio.com/');
-
+  .constant('FBURL', 'https://fiery-fire-8387.firebaseio.com/');
