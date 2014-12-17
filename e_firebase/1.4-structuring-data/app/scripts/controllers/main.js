@@ -16,10 +16,17 @@ angular.module('14StructuringDataApp')
     var childRef = rootRef.child('message');
 
     childRef.on('value', function( snapshot ){
-        // every time value is updated on the childRef, snapshot will return a new value
-        $scope.message = snapshot.val();
+        // every time value is updated on the childRef,
+        // snapshot will return a new value
+        var snapshotVal = snapshot.val();
+        console.log('value from firebase: ', snapshotVal);       // this get update when firebose change
+        $scope.message = snapshotVal;   // but $scope.message did not reflect in the form (Why ? )  <---- [!]
     });
 
+    $scope.$watch('message.text', function(newVal){
+        // $scope.$watch did not catch change from firebase   <---- [!]
+        console.log('value in text box: ', newVal);
+    });
 
 
     // https://fiery-fire-8387.firebaseio.com/message
