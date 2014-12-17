@@ -22,6 +22,7 @@ angular.module('14StructuringDataApp')
     messagesRef.on('value', function( snapshot ){
         $timeout(function(){
             var snapshotVal = snapshot.val();
+            console.log(snapshotVal);
             $scope.messages = snapshotVal;
         }, 0);
     });
@@ -32,7 +33,9 @@ angular.module('14StructuringDataApp')
             , text: $scope.currentText
         }
 
-        messagesRef.push(newMessage);  // need to understand this
+        messagesRef.push(newMessage);
+        // when using set() you have to name your key
+        // push() is different from set() in that you item is assigned a unique key
     }
 
   });
