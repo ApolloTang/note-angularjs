@@ -15,6 +15,13 @@ angular.module('14StructuringDataApp')
     var rootRef = new Firebase('https://fiery-fire-8387.firebaseio.com/');
     var childRef = rootRef.child('message');
 
+    childRef.on('value', function( snapshot ){
+        // every time value is updated on the childRef, snapshot will return a new value
+        $scope.message = snapshot.val();
+    });
+
+
+
     // https://fiery-fire-8387.firebaseio.com/message
     $scope.setMessage = function(){
         childRef.set({
