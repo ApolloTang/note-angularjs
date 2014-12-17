@@ -33,7 +33,7 @@ angular.module('14StructuringDataApp')
     $scope.$watch('message.text', function(newVal){
         console.log('value in text box: ', newVal);
         if (!newVal){ return; }
-        childRef.update({ text: newVal })
+        childRef.update({ text: newVal });
     });
 
 
