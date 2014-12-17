@@ -24,6 +24,21 @@ angular.module('14StructuringDataApp')
                 // don't understand how this work
                 // but by wrapping the code that update $scope.message inside $timeout (with delay of 0sec )
                 // event from firebase can now propagate into angular
+
+            // what are available in snapshot ?
+            console.log('hasChildren(): ', snapshot.hasChildren() );
+            console.log('hasChild("text"): ', snapshot.hasChild('text') );
+            console.log('hasChild("dog"): ', snapshot.hasChild('dog') );
+            console.log('name: ', snapshot.name() );
+            console.log('numChildren: ', snapshot.numChildren() );
+            snapshot.forEach(function(item){
+                console.log('iterating item: ', item);
+                console.log('iterating item.name() - item.val(): ', item.name() + ' - ' + item.val() );
+                console.log('iterating item.hasChildren(): ', item.hasChildren() );
+                console.log('iterating item.ref(): ', item.ref() ); // https://fiery-fire-8387.firebaseio.com/message/text
+                                                                    // https://fiery-fire-8387.firebaseio.com/message/user
+            });
+
             var snapshotVal = snapshot.val();
             console.log('value from firebase: ', snapshotVal);       // this get update when firebose change
             $scope.message = snapshotVal;
