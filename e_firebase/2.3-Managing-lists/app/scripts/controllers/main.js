@@ -19,14 +19,20 @@ angular.module('14StructuringDataApp')
     $scope.currentText = null;
 
 
+    // And becuse "child_added" return item one at a time you will
+    // have to reconstruct the collection locally because
+    // ng-repeat work with collection (which we will do next)
+
+    $scope.messages = [];
+
     messagesRef.on('value', function( snapshot ){
         // with "onValue" every time item is added to collection,
         // Firebase returns a snapshot object contain the entire
         // collection of the reference
         $timeout(function(){
             var snapshotVal = snapshot.val();
-            console.log('value: ', snapshotVal);
-            $scope.messages = snapshotVal;
+            // console.log('value: ', snapshotVal);
+            // $scope.messages = snapshotVal;
         }, 0);
     });
 
@@ -43,15 +49,12 @@ angular.module('14StructuringDataApp')
         // entire collection when a single item is added
         // you will get an expansive bill at the end of the month.
         //
-        // And becuse "child_added" return item one at a time you will
-        // have to reconstruct the collection locally because
-        // ng-repeat work with collection (which we will do next)
         $timeout(function(){
             var snapshotVal = snapshot.val();
             console.log('** child_added: ', snapshotVal);
-            // $scope.messages = snapshotVal;
-        }, 0);
-    });
+            $scope.messages.push(snapshotVal);
+    }, 0);
+});
 
     $scope.sendMessage = function(){
         var newMessage = {
