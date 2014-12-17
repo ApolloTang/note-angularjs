@@ -70,6 +70,23 @@ angular.module('14StructuringDataApp')
         }, 0);
     });
 
+    messagesRef.on('child_removed', function( snapshot ){
+        $timeout(function(){
+            deleteMessageByName(snapshot.key());
+        });
+    });
+
+    function deleteMessageByName(name) {
+        var i=0;
+        for (; i < $scope.messages.length; i++ ) {
+            var currentMessage = $scope.messages[i];
+            if (currentMessage.name === name) {
+                $scope.messages.splice(i,1);
+                break;
+            }
+        }
+    }
+
     function findMessageByName(name) {
         var messageFound = null;
         var i=0;
