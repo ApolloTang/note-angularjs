@@ -10,17 +10,31 @@
  * Controller of the 14StructuringDataApp
  */
 angular.module('14StructuringDataApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $timeout) {
 
     var rootRef = new Firebase('https://fiery-fire-8387.firebaseio.com/');
     var childRef = rootRef.child('message');
 
+    // childRef.on('value', function( snapshot ){
+    //     // every time value is updated on the childRef,
+    //     // snapshot will return a new value
+    //     var snapshotVal = snapshot.val();
+    //     console.log('value from firebase: ', snapshotVal);       // this get update when firebose change
+    //     $scope.message = snapshotVal;   // but $scope.message did not reflect in the form (Why ? )  <---- [!]
+    // });
+
     childRef.on('value', function( snapshot ){
         // every time value is updated on the childRef,
         // snapshot will return a new value
-        var snapshotVal = snapshot.val();
-        console.log('value from firebase: ', snapshotVal);       // this get update when firebose change
-        $scope.message = snapshotVal;   // but $scope.message did not reflect in the form (Why ? )  <---- [!]
+        $timeout(function(){
+            //@TODO  To study and figure out later
+                // don't understand how this work
+                // but by wrapping the code that update $scope.message inside $timeout (with delay of 0sec )
+                // event from firebase can now propagate into angular
+            var snapshotVal = snapshot.val();
+            console.log('value from firebase: ', snapshotVal);       // this get update when firebose change
+            $scope.message = snapshotVal;   // but $scope.message did not reflect in the form (Why ? )  <---- [!]
+        }, 0); // <--- [!] note that delay of zero second
     });
 
     $scope.$watch('message.text', function(newVal){
