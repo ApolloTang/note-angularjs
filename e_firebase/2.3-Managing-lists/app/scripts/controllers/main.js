@@ -20,7 +20,15 @@ angular.module('14StructuringDataApp')
     $scope.currentUser = null;
     $scope.currentText = null;
 
-    titleRef.on('value', function(snapshot){
+    // titleRef.on('value', function(snapshot){
+    //     $timeout(function(){
+    //         $scope.title = snapshot.val();
+    //         console.log('value changed');
+    //         titleRef.off();
+    //     });
+    // });
+
+    titleRef.once('value', function(snapshot){
         $timeout(function(){
             $scope.title = snapshot.val();
             console.log('value changed');
