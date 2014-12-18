@@ -6,14 +6,10 @@
     console.log('MessageService load');
     angular.module('14StructuringDataApp').service('MessageService', function(FBURL){
         var messageRef = new Firebase(FBURL).child('messages');
-        var startAtPriority = null;
-        var endAtPriority = null;
         return {
             childAdded: function childAdded(limitNumber, callback){
                 messageRef
-                    // using .startAt and .limit to give paging functionality
-                    .startAt( startAtPriority, '-JdPl-jf43PH9lk77Fg5' )
-                    // .endAt( endAtPriority, '-JdT-EkL4w2WSvf2q_hT' )
+                    .startAt()
                     .limit(limitNumber)
                     .on('child_added', function(snapshot){
                         var val = snapshot.val();
@@ -26,6 +22,17 @@
             , off: function(){
                 console.log('turnFeedOff');
                 messageRef.off();
+            }
+            , pageNext: function(name, numberOfItems){
+
+                messageRef.startAt(null, name)
+                    .once('value', function(snapshot){
+                        return snapshot.val();
+                        // Cant just return snapshot directly because once()is asynchronous
+                    });
+            }
+            , pageBack: function(){
+
             }
         };
     });
