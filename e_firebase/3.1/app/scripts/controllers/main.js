@@ -46,4 +46,10 @@ angular.module('14StructuringDataApp')
         MessageService.off();
     };
 
+    $scope.pageNext = function() {
+        var lastItem = $scope.messages[$scope.messages.length - 1];
+        MessageService.pageNext(lastItem.name, 10).then(function(messages){
+            console.log(messages);
+        })
+    };
   });
