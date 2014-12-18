@@ -8,10 +8,12 @@
         var messageRef = new Firebase(FBURL).child('messages');
         return {
             childAdded: function childAdded(callback){
-                messageRef.on('child_added', function(snapshot){
-                    var val = snapshot.val();
-                    callback.call(this, { user: val.user, text: val.text, name: snapshot.key() } );
-                });
+                messageRef
+                    .limit(5)   // only fetch the last 5
+                    .on('child_added', function(snapshot){
+                        var val = snapshot.val();
+                        callback.call(this, { user: val.user, text: val.text, name: snapshot.key() } );
+                    });
             }
             , add: function addMessage(message){
                 messageRef.push(message);
