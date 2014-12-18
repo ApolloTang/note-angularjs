@@ -15,6 +15,13 @@ angular.module('14StructuringDataApp')
 
         // var rootRef = new Firebase('https://fiery-fire-8387.firebaseio.com/');
 
+        // "new" key word should be avoided in the controller.
+        // it is not a good practice to instantiate a class in the controller like above.
+        // If you are using the "new" keyword, you are creating
+        // an object that should be dependency, and any dependency in the controller
+        // need to be injected. (video 3.1 7:30 )
+
+
     $scope.currentUser = null;
     $scope.currentText = null;
 
