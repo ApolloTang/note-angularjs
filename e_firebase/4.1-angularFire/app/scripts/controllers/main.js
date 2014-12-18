@@ -39,7 +39,12 @@ angular.module('14StructuringDataApp')
             user: $scope.currentUser
             , text: $scope.currentText
         };
-        MessageService.add(newMessage);
+        //MessageService.add(newMessage);
+        var promise = MessageService.add(newMessage);
+        debugger;
+        promise.then(function(data){
+            console.log('data from angularFire: ', data);
+        });
     };
 
     $scope.turnFeedOff = function() {

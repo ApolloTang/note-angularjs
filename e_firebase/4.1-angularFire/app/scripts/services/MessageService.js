@@ -7,7 +7,9 @@
     angular.module('14StructuringDataApp')
         .service('MessageService', function(FBURL, $q, $firebase){ // <--- inject firebase
             var messageRef = new Firebase(FBURL).child('messages');
-            var fireMessage = $firebase(messageRef);
+            var fireMessage = $firebase(messageRef)
+                                .$asArray();  // <--- missing in tutorial !!
+               //see: https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray-addnewdata
             return {
                 childAdded: function childAdded(limitNumber, callback){
                     messageRef
@@ -19,7 +21,14 @@
                         });
                 }
                 , add: function addMessage(message){
-                    messageRef.push(message);
+                    // messageRef.push(message);
+                    debugger;
+                    var promise = fireMessage.$add(message);
+                    return promise;
+                    // v4.2--00:39
+                    // $add is different from push. In addition to executing a push,
+                    // it assigns an unique key and $add return the unique key
+                    // as a promise.
                 }
                 , off: function(){
                     console.log('turnFeedOff');
