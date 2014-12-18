@@ -39,8 +39,20 @@
                         });
                     return deferred.promise;
                 }
-                , pageBack: function(){
-
+                , pageBack: function(name, numberOfItems){
+                    var deferred = $q.defer();
+                    var messages = [];
+                    messageRef.endAt(null, name)
+                        .limit( numberOfItems )
+                        .once( 'value', function(snapshot){
+                            snapshot.forEach(function(snapItem){
+                                var itemVal = snapItem.val();
+                                itemVal.name = snapItem.key()
+                                messages.push(itemVal);
+                            });
+                            deferred.resolve(messages);
+                        });
+                    return deferred.promise;
                 }
             };
         });

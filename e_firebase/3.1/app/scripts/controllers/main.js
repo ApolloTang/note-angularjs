@@ -49,7 +49,12 @@ angular.module('14StructuringDataApp')
     $scope.pageNext = function() {
         var lastItem = $scope.messages[$scope.messages.length - 1];
         MessageService.pageNext(lastItem.name, 10).then(function(messages){
-            console.log(messages);
+            $scope.messages = messages;
+        })
+    };
+    $scope.pageBack = function() {
+        var firstItem = $scope.messages[0];
+        MessageService.pageBack(firstItem.name, 10).then(function(messages){
             $scope.messages = messages;
         })
     };
