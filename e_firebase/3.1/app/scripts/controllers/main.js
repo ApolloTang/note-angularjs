@@ -50,6 +50,7 @@ angular.module('14StructuringDataApp')
         var lastItem = $scope.messages[$scope.messages.length - 1];
         MessageService.pageNext(lastItem.name, 10).then(function(messages){
             console.log(messages);
+            $scope.messages = messages;
         })
     };
   });
