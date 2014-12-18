@@ -5,8 +5,9 @@
 (function(angular){
     console.log('MessageService load');
     angular.module('14StructuringDataApp')
-        .service('MessageService', function(FBURL, $q){ // <--- inject diferr functionality via $q
+        .service('MessageService', function(FBURL, $q, $firebase){ // <--- inject firebase
             var messageRef = new Firebase(FBURL).child('messages');
+            var fireMessage = $firebase(messageRef);
             return {
                 childAdded: function childAdded(limitNumber, callback){
                     messageRef
