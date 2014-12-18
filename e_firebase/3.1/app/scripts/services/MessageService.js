@@ -16,6 +16,10 @@
             , add: function addMessage(message){
                 messageRef.push(message);
             }
+            , off: function(){
+                console.log('turnFeedOff');
+                messageRef.off();
+            }
         };
     });
 })(window.angular);

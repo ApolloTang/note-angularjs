@@ -116,8 +116,8 @@ angular.module('14StructuringDataApp')
 
 
     $scope.turnFeedOff = function() {
-        console.log('turnFeedOff');
-        messagesRef.off();
+        // messagesRef.off();
+        MessageService.off();
     };
 
   });
