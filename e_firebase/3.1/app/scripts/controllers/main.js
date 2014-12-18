@@ -21,13 +21,6 @@ angular.module('14StructuringDataApp')
     $scope.currentUser = null;
     $scope.currentText = null;
 
-    // titleRef.on('value', function(snapshot){
-    //     $timeout(function(){
-    //         $scope.title = snapshot.val();
-    //         console.log('value changed');
-    //         titleRef.off();
-    //     });
-    // });
 
     titleRef.once('value', function(snapshot){
         $timeout(function(){
@@ -44,29 +37,12 @@ angular.module('14StructuringDataApp')
         });
     });
 
-
-    // And becuse "child_added" return item one at a time you will
-    // have to reconstruct the collection locally because
-    // ng-repeat work with collection (which we will do next)
     $scope.messages = [];
-
 
     messagesRef.on('child_changed', function( snapshot ){
         $timeout(function(){
             var snapshotVal = snapshot.val();
-            // console.log('&& child_changed: ', snapshot.name());  // <-- name() is deprecated
-            console.log('&& child_changed, key: ', snapshot.key());
-
             var message = findMessageByName(snapshot.key());
-            console.log('&& child_changed, message: ', message);
-            // Object {text: "dsf", user: "fdsaf", name: "-JdNzlBP8yIn7jlzw2Ef", $$hashKey: "object:3"}
-            // Note the above console.log message item "$$hashkey":
-                // This property is used as a key to associated
-                // DOM elements with the corresponding item in
-                // the array by identity. Moving the same object
-                // in array would move the DOM element in the
-                // same way in the DOM.
-                // [ref]: https://docs.angularjs.org/api/ng/directive/ngRepeat
             var newText = snapshotVal.text;
             message.text = newText;
         }, 0);
@@ -107,16 +83,11 @@ angular.module('14StructuringDataApp')
             user: $scope.currentUser
             , text: $scope.currentText
         };
-
         MessageService.add(newMessage);
-        // messagesRef.push(newMessage);
-            // when using set() you have to name your key
-            // push() is different from set() in that you item is assigned a unique key
     };
 
 
     $scope.turnFeedOff = function() {
-        // messagesRef.off();
         MessageService.off();
     };
 
