@@ -41,7 +41,7 @@ angular.module('14StructuringDataApp')
         console.log('MessageService.childAdded: ', addedChild);
         $timeout(function(){
             $scope.messages.push(addedChild);
-        })
+        });
     });
 
 
@@ -108,9 +108,10 @@ angular.module('14StructuringDataApp')
             , text: $scope.currentText
         };
 
-        messagesRef.push(newMessage);
-        // when using set() you have to name your key
-        // push() is different from set() in that you item is assigned a unique key
+        MessageService.add(newMessage);
+        // messagesRef.push(newMessage);
+            // when using set() you have to name your key
+            // push() is different from set() in that you item is assigned a unique key
     };
 
 

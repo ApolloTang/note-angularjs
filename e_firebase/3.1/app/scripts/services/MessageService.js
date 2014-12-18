@@ -13,6 +13,9 @@
                     callback.call(this, { user: val.user, text: val.text, name: snapshot.key() } );
                 });
             }
+            , add: function addMessage(message){
+                messageRef.push(message);
+            }
         };
     });
 })(window.angular);
