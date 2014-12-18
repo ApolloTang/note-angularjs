@@ -25,7 +25,7 @@ angular.module('14StructuringDataApp')
     $scope.currentUser = null;
     $scope.currentText = null;
 
-    MessageService.childAdded(function(addedChild){
+    MessageService.childAdded( 5, function(addedChild){
         console.log('MessageService.childAdded: ', addedChild);
         $timeout(function(){
             $scope.messages.push(addedChild);
