@@ -40,8 +40,8 @@ angular.module('14StructuringDataApp')
         $scope.messages.push(addedChild);
     });
 
-
     // MessageService.loaded( function(promise){
+    //     // this is the alternate solution I came up with
     //     console.log(promise)
     //     promise.then( function(data){
     //         console.log('MessageService.loaded ', data)
@@ -64,7 +64,11 @@ angular.module('14StructuringDataApp')
     };
 
     $scope.turnFeedOff = function() {
-        MessageService.off();
+        MessageService.feedOff();
+    };
+
+    $scope.turnFeedOn = function() {
+        MessageService.feedOn();
     };
 
     $scope.pageNext = function() {
