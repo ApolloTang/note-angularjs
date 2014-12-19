@@ -25,11 +25,19 @@ angular.module('14StructuringDataApp')
     $scope.currentUser = null;
     $scope.currentText = null;
 
-    MessageService.childAdded( 5, function(addedChild){
-        console.log('MessageService.childAdded: ', addedChild);
-        $timeout(function(){
-            $scope.messages.push(addedChild);
-        });
+    // MessageService.childAdded( 5, function(addedChild){
+    //     console.log('MessageService.childAdded: ', addedChild);
+    //     $timeout(function(){
+    //         $scope.messages.push(addedChild);
+    //     });
+    // });
+
+    MessageService.loaded( function(promise){
+        console.log(promise)
+        promise.then( function(data){
+            console.log('MessageService.loaded ', data)
+            $scope.messages = data;
+    });
     });
 
     $scope.messages = [];

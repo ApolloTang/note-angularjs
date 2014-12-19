@@ -7,18 +7,24 @@
     angular.module('14StructuringDataApp')
         .service('MessageService', function(FBURL, $q, $firebase){ // <--- inject firebase
             var messageRef = new Firebase(FBURL).child('messages');
+            var $fb = $firebase(messageRef);
             var fireMessage = $firebase(messageRef)
                                 .$asArray();  // <--- missing in tutorial !!
                //see: https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray-addnewdata
             return {
-                childAdded: function childAdded(limitNumber, callback){
-                    messageRef
-                        // .startAt()
-                        // .limit(limitNumber)
-                        .on('child_added', function(snapshot){
-                            var val = snapshot.val();
-                            callback.call(this, { user: val.user, text: val.text, name: snapshot.key() } );
-                        });
+                // childAdded: function childAdded(limitNumber, callback){
+                //     messageRef
+                //         .startAt()
+                //         .limit(limitNumber)
+                //         .on('child_added', function(snapshot){
+                //             var val = snapshot.val();
+                //             callback.call(this, { user: val.user, text: val.text, name: snapshot.key() } );
+                //         });
+                // }
+                // ,
+                loaded: function (callback) {
+                    var promise = fireMessage.$loaded()
+                    callback.call(this, promise);
                 }
                 , add: function addMessage(message){
                     // messageRef.push(message);
