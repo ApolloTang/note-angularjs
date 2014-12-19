@@ -41,9 +41,8 @@ angular.module('14StructuringDataApp')
         };
         //MessageService.add(newMessage);
         var promise = MessageService.add(newMessage);
-        debugger;
         promise.then(function(data){
-            console.log('data from angularFire: ', data);
+            console.log('data from angularFire: ', data.key());
         });
     };
 

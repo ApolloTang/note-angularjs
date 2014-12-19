@@ -13,8 +13,8 @@
             return {
                 childAdded: function childAdded(limitNumber, callback){
                     messageRef
-                        .startAt()
-                        .limit(limitNumber)
+                        // .startAt()
+                        // .limit(limitNumber)
                         .on('child_added', function(snapshot){
                             var val = snapshot.val();
                             callback.call(this, { user: val.user, text: val.text, name: snapshot.key() } );
@@ -22,7 +22,6 @@
                 }
                 , add: function addMessage(message){
                     // messageRef.push(message);
-                    debugger;
                     var promise = fireMessage.$add(message);
                     return promise;
                     // v4.2--00:39
