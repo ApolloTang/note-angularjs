@@ -6,12 +6,10 @@
     console.log('MessageService load');
     angular.module('14StructuringDataApp')
         .service('MessageService', function(/*FBURL, */ MSGURL,  $q, $firebase){ //<--- change constant
-            // var messageRef = new Firebase(FBURL).child('messages');
-            var messageRef = new Firebase(MSGURL).limit(3);
 
-            var fireMessage = $firebase(messageRef)
-                                .$asArray();  // <--- missing in tutorial !!
-               //see: https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray-addnewdata
+            var messageRef = new Firebase(MSGURL).limitToFirst(3);
+
+            var fireMessage = $firebase(messageRef).$asArray();
 
             var _subscribeToFeed = true;
 
@@ -33,15 +31,6 @@
                 }
 
                 , watch_update: function childAdded(callback){
-                    // it turns out that $on has been deprecated
-                    //
-                    //  [Ref]: https://www.firebase.com/docs/web/libraries/angular/changelog.html
-                    //      Jul 30, 2014 - Version 0.8.0
-                    //
-                    //      $on() and $off() no longer exist. Similar functionality can be obtained with $watch()
-                    //      but should be discouraged for trying to manually manage server events (manipulation
-                    //      should be done with data transformations through $extendFactory() instead).
-                    //
                     console.log('childAdded cAlled');
                     fireMessage.$watch(function(e) {
                         if (e.event === 'child_added' && _subscribeToFeed ) {
@@ -77,22 +66,16 @@
                      _subscribeToFeed = true;
                 }
 
-                , pageBack: function(name, numberOfItems){
-                    var deferred = $q.defer();
-                    var messages = [];
+                , pageNext: function(previousLast, numberOfItems){
+                    // var deferred = $q.defer();
+                    // var messages = [];
 
                     // var pageMessageRef = new Firebase(FBURL).child('messages');
                     var pageMessageRef = new Firebase(MSGURL)
-                                            .startAt(null, name)
+                                                .startAt(null, previousLast)
                                                 .limit( numberOfItems );
 
-                    // console.log('pageMessageRef', pageMessageRef);
-                    var pageFireMessage = $firebase( pageMessageRef )
-                                                .$asArray();  // <--- missing in tutorial !!
-                    // debugger;
-                    pageFireMessage.$loaded().then(function(data){
-                        console.log('limit to 4', data);
-                    });
+                    var pageFireMessage = $firebase( pageMessageRef ).$asArray();
 
                     var promise = pageFireMessage.$loaded();
                     return promise;
@@ -111,21 +94,14 @@
                     // return deferred.promise;
                 }
 
-                , pageNext: function(name, numberOfItems){
-                    var deferred = $q.defer();
-                    var messages = [];
+                , pageBack: function(previousFirst, numberOfItems){
+                    // var deferred = $q.defer();
+                    // var messages = [];
 
                     var pageMessageRef = new Firebase(MSGURL)
-                                            .endAt(null, name)
+                                            .endAt(null, previousFirst)
                                                 .limit( numberOfItems );
-                    // console.log('pageMessageRef', pageMessageRef);
-                    var pageFireMessage = $firebase( pageMessageRef )
-                                                .$asArray();  // <--- missing in tutorial !!
-
-
-                    pageFireMessage.$loaded().then(function(data){
-                        console.log('limit to 4', data);
-                    });
+                    var pageFireMessage = $firebase( pageMessageRef ).$asArray();
 
                     var promise = pageFireMessage.$loaded();
                     return promise;
