@@ -11,6 +11,8 @@
                                 .$asArray();  // <--- missing in tutorial !!
                //see: https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray-addnewdata
 
+            var _subscribeToFeed = true;
+
             return {
                 childAdded: function childAdded(limitNumber, callback){
                     // code from previous step in tutorial
@@ -56,7 +58,7 @@
                     //
                     console.log('childAdded cAlled');
                     fireMessage.$watch(function(e) {
-                        if (e.event === 'child_added') {
+                        if (e.event === 'child_added' && _subscribeToFeed ) {
                             var key = e.key;
                             var record = fireMessage.$getRecord(key);
                             callback.call(this, { user: record.user, text: record.text, name: key } );
@@ -79,9 +81,24 @@
                     // it assigns an unique key and $add return the unique key
                     // as a promise.
                 }
-                , off: function(){
-                    console.log('turnFeedOff');
-                    messageRef.off();
+
+                // , off: function(){
+                //     console.log('turnFeedOff');
+                //     messageRef.off();
+                // }
+
+                // , off: function(){
+                //     console.log('turnFeedOff');
+                //     messageRef.$off(); // <--- $off no long avaialble in this version of angularFire
+                // }
+
+                , feedOff: function(){
+                     console.log('turn feed off');
+                     _subscribeToFeed = false;
+                }
+                , feedOn: function(){
+                     console.log('turn feed on');
+                     _subscribeToFeed = true;
                 }
                 , pageNext: function(name, numberOfItems){
                     var deferred = $q.defer();
