@@ -7,7 +7,8 @@
     angular.module('14StructuringDataApp')
         .service('MessageService', function(/*FBURL, */ MSGURL,  $q, $firebase){ //<--- change constant
             // var messageRef = new Firebase(FBURL).child('messages');
-            var messageRef = new Firebase(MSGURL);
+            var messageRef = new Firebase(MSGURL).limit(3);
+
             var fireMessage = $firebase(messageRef)
                                 .$asArray();  // <--- missing in tutorial !!
                //see: https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray-addnewdata
@@ -76,40 +77,70 @@
                      _subscribeToFeed = true;
                 }
 
-                , pageNext: function(name, numberOfItems){
+                , pageBack: function(name, numberOfItems){
                     var deferred = $q.defer();
                     var messages = [];
 
                     // var pageMessageRef = new Firebase(FBURL).child('messages');
-                    var pageMessageRef = new Firebase(MSGURL);
+                    var pageMessageRef = new Firebase(MSGURL)
+                                            .startAt(null, name)
+                                                .limit( numberOfItems );
 
-                    messageRef.startAt(null, name)
-                        .limit( numberOfItems )
-                        .once( 'value', function(snapshot){
-                            snapshot.forEach(function(snapItem){
-                                var itemVal = snapItem.val();
-                                itemVal.name = snapItem.key();
-                                messages.push(itemVal);
-                            });
-                            deferred.resolve(messages);
-                        });
-                    return deferred.promise;
+                    // console.log('pageMessageRef', pageMessageRef);
+                    var pageFireMessage = $firebase( pageMessageRef )
+                                                .$asArray();  // <--- missing in tutorial !!
+                    // debugger;
+                    pageFireMessage.$loaded().then(function(data){
+                        console.log('limit to 4', data);
+                    });
+
+                    var promise = pageFireMessage.$loaded();
+                    return promise;
+
+                    // messageRef
+                    //     // .startAt(null, name)
+                    //     // .limit( numberOfItems )
+                    //     .once( 'value', function(snapshot){
+                    //         snapshot.forEach(function(snapItem){
+                    //             var itemVal = snapItem.val();
+                    //             itemVal.name = snapItem.key();
+                    //             messages.push(itemVal);
+                    //         });
+                    //         deferred.resolve(messages);
+                    //     });
+                    // return deferred.promise;
                 }
 
-                , pageBack: function(name, numberOfItems){
+                , pageNext: function(name, numberOfItems){
                     var deferred = $q.defer();
                     var messages = [];
-                    messageRef.endAt(null, name)
-                        .limit( numberOfItems )
-                        .once( 'value', function(snapshot){
-                            snapshot.forEach(function(snapItem){
-                                var itemVal = snapItem.val();
-                                itemVal.name = snapItem.key();
-                                messages.push(itemVal);
-                            });
-                            deferred.resolve(messages);
-                        });
-                    return deferred.promise;
+
+                    var pageMessageRef = new Firebase(MSGURL)
+                                            .endAt(null, name)
+                                                .limit( numberOfItems );
+                    // console.log('pageMessageRef', pageMessageRef);
+                    var pageFireMessage = $firebase( pageMessageRef )
+                                                .$asArray();  // <--- missing in tutorial !!
+
+
+                    pageFireMessage.$loaded().then(function(data){
+                        console.log('limit to 4', data);
+                    });
+
+                    var promise = pageFireMessage.$loaded();
+                    return promise;
+
+                    // messageRef.endAt(null, name)
+                    //     .limit( numberOfItems )
+                    //     .once( 'value', function(snapshot){
+                    //         snapshot.forEach(function(snapItem){
+                    //             var itemVal = snapItem.val();
+                    //             itemVal.name = snapItem.key();
+                    //             messages.push(itemVal);
+                    //         });
+                    //         deferred.resolve(messages);
+                    //     });
+                    // return deferred.promise;
                 }
             };
         });
