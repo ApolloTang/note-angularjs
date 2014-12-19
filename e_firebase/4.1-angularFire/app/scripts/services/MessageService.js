@@ -11,21 +11,41 @@
             var fireMessage = $firebase(messageRef)
                                 .$asArray();  // <--- missing in tutorial !!
                //see: https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray-addnewdata
+
+
             return {
-                // childAdded: function childAdded(limitNumber, callback){
-                //     messageRef
-                //         .startAt()
-                //         .limit(limitNumber)
-                //         .on('child_added', function(snapshot){
-                //             var val = snapshot.val();
-                //             callback.call(this, { user: val.user, text: val.text, name: snapshot.key() } );
-                //         });
-                // }
-                // ,
-                loaded: function (callback) {
-                    var promise = fireMessage.$loaded()
-                    callback.call(this, promise);
+                childAdded: function childAdded(limitNumber, callback){
+                    // it turns out that $on has been deprecated
+                    //
+                    //  [Ref]: https://www.firebase.com/docs/web/libraries/angular/changelog.html
+                    //      Jul 30, 2014 - Version 0.8.0
+                    //
+                    //      $on() and $off() no longer exist. Similar functionality can be obtained with $watch()
+                    //      but should be discouraged for trying to manually manage server events (manipulation
+                    //      should be done with data transformations through $extendFactory() instead).
+                    //
+                    console.log('childAdded cAlled');
+                    fireMessage.$watch(function(e) {
+                        if (e.event === 'child_added') {
+                            var key = e.key;
+                            var record = fireMessage.$getRecord(key);
+                            callback.call(this, { user: record.user, text: record.text, name: key } );
+                        }
+                    });
+
+                    // messageRef
+                    //     .startAt()
+                    //     .limit(limitNumber)
+                    //     .on('child_added', function(snapshot){
+                    //         var val = snapshot.val();
+                    //         callback.call(this, { user: val.user, text: val.text, name: snapshot.key() } );
+                    //     });
                 }
+
+                // loaded: function (callback) {
+                //     var promise = fireMessage.$loaded();
+                //     callback.call(this, promise);
+                // }
                 , add: function addMessage(message){
                     // messageRef.push(message);
                     var promise = fireMessage.$add(message);
@@ -47,7 +67,7 @@
                         .once( 'value', function(snapshot){
                             snapshot.forEach(function(snapItem){
                                 var itemVal = snapItem.val();
-                                itemVal.name = snapItem.key()
+                                itemVal.name = snapItem.key();
                                 messages.push(itemVal);
                             });
                             deferred.resolve(messages);
@@ -62,7 +82,7 @@
                         .once( 'value', function(snapshot){
                             snapshot.forEach(function(snapItem){
                                 var itemVal = snapItem.val();
-                                itemVal.name = snapItem.key()
+                                itemVal.name = snapItem.key();
                                 messages.push(itemVal);
                             });
                             deferred.resolve(messages);

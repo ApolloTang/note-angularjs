@@ -32,14 +32,19 @@ angular.module('14StructuringDataApp')
     //     });
     // });
 
-    MessageService.loaded( function(promise){
-        console.log(promise)
-        promise.then( function(data){
-            console.log('MessageService.loaded ', data)
-            $scope.messages = data;
-    });
+    MessageService.childAdded( 5, function(addedChild){
+        console.log('MessageService.childAdded: ', addedChild);
+        $scope.messages.push(addedChild);
     });
 
+    // MessageService.loaded( function(promise){
+    //     console.log(promise)
+    //     promise.then( function(data){
+    //         console.log('MessageService.loaded ', data)
+    //         $scope.messages = data;
+    //     });
+    // });
+    //
     $scope.messages = [];
 
     $scope.sendMessage = function(){
@@ -62,12 +67,12 @@ angular.module('14StructuringDataApp')
         var lastItem = $scope.messages[$scope.messages.length - 1];
         MessageService.pageNext(lastItem.name, 10).then(function(messages){
             $scope.messages = messages;
-        })
+        });
     };
     $scope.pageBack = function() {
         var firstItem = $scope.messages[0];
         MessageService.pageBack(firstItem.name, 10).then(function(messages){
             $scope.messages = messages;
-        })
+        });
     };
   });
