@@ -26,16 +26,20 @@ angular.module('14StructuringDataApp')
     $scope.currentText = null;
 
     // MessageService.childAdded( 5, function(addedChild){
+    //    // code from previous step in tutorial
+    //    // it is replaced by watch_update bellow
+    //    // still work but comment out to use watch_update bellow
     //     console.log('MessageService.childAdded: ', addedChild);
     //     $timeout(function(){
     //         $scope.messages.push(addedChild);
     //     });
     // });
 
-    MessageService.childAdded( 5, function(addedChild){
+    MessageService.watch_update( function(addedChild){
         console.log('MessageService.childAdded: ', addedChild);
         $scope.messages.push(addedChild);
     });
+
 
     // MessageService.loaded( function(promise){
     //     console.log(promise)
@@ -44,7 +48,7 @@ angular.module('14StructuringDataApp')
     //         $scope.messages = data;
     //     });
     // });
-    //
+
     $scope.messages = [];
 
     $scope.sendMessage = function(){

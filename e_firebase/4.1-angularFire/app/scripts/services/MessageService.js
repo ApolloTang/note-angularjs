@@ -7,14 +7,44 @@
     angular.module('14StructuringDataApp')
         .service('MessageService', function(FBURL, $q, $firebase){ // <--- inject firebase
             var messageRef = new Firebase(FBURL).child('messages');
-            var $fb = $firebase(messageRef);
             var fireMessage = $firebase(messageRef)
                                 .$asArray();  // <--- missing in tutorial !!
                //see: https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray-addnewdata
 
-
             return {
                 childAdded: function childAdded(limitNumber, callback){
+                    // code from previous step in tutorial
+                    // it is replaced by watch_update bellow
+                    messageRef
+                        .startAt()
+                        .limit(limitNumber)
+                        .on('child_added', function(snapshot){
+                            var val = snapshot.val();
+                            callback.call(this, {
+                                user: val.user
+                                , text: val.text
+                                , name: snapshot.key()
+                            });
+                        });
+                }
+
+                // childAdded: function childAdded(limitNumber, callback){
+                //     // This is tutorial's code it is no longer working after version 0.8.0
+                //     messageRef
+                //         // .startAt()
+                //         // .limit(limitNumber)
+                //         .$on('child_added', function(data){
+                //             console.log(data)
+                //             var val = data.snapshot.value;
+                //             callback.call(this, {
+                //                   user: val.user
+                //                 , text: val.text
+                //                 , name: data.snapshot.name
+                //             });
+                //         });
+                // }
+
+                , watch_update: function childAdded(callback){
                     // it turns out that $on has been deprecated
                     //
                     //  [Ref]: https://www.firebase.com/docs/web/libraries/angular/changelog.html
@@ -32,20 +62,14 @@
                             callback.call(this, { user: record.user, text: record.text, name: key } );
                         }
                     });
-
-                    // messageRef
-                    //     .startAt()
-                    //     .limit(limitNumber)
-                    //     .on('child_added', function(snapshot){
-                    //         var val = snapshot.val();
-                    //         callback.call(this, { user: val.user, text: val.text, name: snapshot.key() } );
-                    //     });
                 }
 
-                // loaded: function (callback) {
-                //     var promise = fireMessage.$loaded();
-                //     callback.call(this, promise);
+                // , loaded: function (callback) {
+                //     // this is the alternate solution I came up with
+                //      var promise = fireMessage.$loaded();
+                //      callback.call(this, promise);
                 // }
+
                 , add: function addMessage(message){
                     // messageRef.push(message);
                     var promise = fireMessage.$add(message);
