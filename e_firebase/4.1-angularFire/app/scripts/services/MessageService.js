@@ -5,8 +5,9 @@
 (function(angular){
     console.log('MessageService load');
     angular.module('14StructuringDataApp')
-        .service('MessageService', function(FBURL, $q, $firebase){ // <--- inject firebase
-            var messageRef = new Firebase(FBURL).child('messages');
+        .service('MessageService', function(/*FBURL, */ MSGURL,  $q, $firebase){ //<--- change constant
+            // var messageRef = new Firebase(FBURL).child('messages');
+            var messageRef = new Firebase(MSGURL);
             var fireMessage = $firebase(messageRef)
                                 .$asArray();  // <--- missing in tutorial !!
                //see: https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebasearray-addnewdata
@@ -74,9 +75,14 @@
                      console.log('turn feed on');
                      _subscribeToFeed = true;
                 }
+
                 , pageNext: function(name, numberOfItems){
                     var deferred = $q.defer();
                     var messages = [];
+
+                    // var pageMessageRef = new Firebase(FBURL).child('messages');
+                    var pageMessageRef = new Firebase(MSGURL);
+
                     messageRef.startAt(null, name)
                         .limit( numberOfItems )
                         .once( 'value', function(snapshot){
@@ -89,6 +95,7 @@
                         });
                     return deferred.promise;
                 }
+
                 , pageBack: function(name, numberOfItems){
                     var deferred = $q.defer();
                     var messages = [];

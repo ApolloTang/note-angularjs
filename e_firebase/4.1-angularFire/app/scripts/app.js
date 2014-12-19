@@ -34,4 +34,5 @@ angular
         redirectTo: '/'
       });
   })
-  .constant('FBURL', 'https://fiery-fire-8387.firebaseio.com/');
+  // .constant('FBURL', 'https://fiery-fire-8387.firebaseio.com/')
+  .constant('MSGURL', 'https://fiery-fire-8387.firebaseio.com/messages');
