@@ -30,22 +30,6 @@
                         });
                 }
 
-                // childAdded: function childAdded(limitNumber, callback){
-                //     // This is tutorial's code it is no longer working after version 0.8.0
-                //     messageRef
-                //         // .startAt()
-                //         // .limit(limitNumber)
-                //         .$on('child_added', function(data){
-                //             console.log(data)
-                //             var val = data.snapshot.value;
-                //             callback.call(this, {
-                //                   user: val.user
-                //                 , text: val.text
-                //                 , name: data.snapshot.name
-                //             });
-                //         });
-                // }
-
                 , watch_update: function childAdded(callback){
                     // it turns out that $on has been deprecated
                     //
@@ -66,11 +50,11 @@
                     });
                 }
 
-                // , loaded: function (callback) {
-                //     // this is the alternate solution I came up with
-                //      var promise = fireMessage.$loaded();
-                //      callback.call(this, promise);
-                // }
+                    // , loaded: function (callback) {
+                    //     // this is the alternate solution I came up with
+                    //      var promise = fireMessage.$loaded();
+                    //      callback.call(this, promise);
+                    // }
 
                 , add: function addMessage(message){
                     // messageRef.push(message);
@@ -81,16 +65,6 @@
                     // it assigns an unique key and $add return the unique key
                     // as a promise.
                 }
-
-                // , off: function(){
-                //     console.log('turnFeedOff');
-                //     messageRef.off();
-                // }
-
-                // , off: function(){
-                //     console.log('turnFeedOff');
-                //     messageRef.$off(); // <--- $off no long avaialble in this version of angularFire
-                // }
 
                 , feedOff: function(){
                      console.log('turn feed off');
