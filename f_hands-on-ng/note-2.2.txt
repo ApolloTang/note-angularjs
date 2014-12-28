@@ -39,3 +39,29 @@ $ rails s
 [2014-12-28 01:01:14] INFO  WEBrick::HTTPServer#start: pid=38881 port=3000
 
 
+Proxying API calls during development
+======================================
+
+    https://github.com/drewzboto/grunt-connect-proxy
+
+
+    edit package.js
+
+
+    {
+      "name": "swfront",
+      "version": "0.0.0",
+      "dependencies": {},
+      "devDependencies": {
+        .....
+        "grunt-connect-proxy": "latest",  // <--- added in v2.2_03:18
+        .....
+      },
+        ....
+    }
+
+
+
+$ pwd
+/sw-front
+$ npm install
