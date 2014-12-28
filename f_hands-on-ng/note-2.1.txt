@@ -1,0 +1,31 @@
+$ grunt serve
+
+$ ./node_modules/karma/bin/karma start
+
+or
+$ npm install -g karma-cli
+$ npm install karma-chrome-launcher --save-dev
+
+$ gvim test/karma.conf.js
+
+   browsers: [
+      // 'PhantomJS'   // <--- comment out
+      'Chrome'         // <--- added
+    ],
+
+    // Which plugins to enable
+    plugins: [
+      'karma-phantomjs-launcher',
+      'karma-jasmine'
+        , 'karma-chrome-launcher'   // <--- added
+    ],
+
+$ cd test
+$ karma start
+INFO [karma]: Karma v0.12.28 server started at http://localhost:8080/
+INFO [launcher]: Starting browser Chrome
+WARN [watcher]: Pattern "/Users/apollotang/Aa/2-git-repo/mirror-to-github/note-angularjs/f_hands-on-ng/sw-front/test/mock/**/*.js" does not match any file.
+INFO [Chrome 39.0.2171 (Mac OS X 10.10.1)]: Connected on socket tA1y4-BcZquGnC679jK7 with id 21804138
+Chrome 39.0.2171 (Mac OS X 10.10.1): Executed 2 of 2 SUCCESS (0.028 secs / 0.025 secs)
+
+
