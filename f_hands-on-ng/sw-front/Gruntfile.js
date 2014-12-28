@@ -74,26 +74,14 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
-      server2: {
-        proxies: [
-              {
-                  // for every request that is / go to localhost:9000
-                  context: '/',
-                  host: 'localhost',
-                  port: 9000
-              }
-          ]
-      },
-      server3: {
-          proxies: [
-              {
-                  // for every request that is /api go to localhost:3000
-                  context: '/api',
-                  host: 'localhost',
-                  port: 3000
-              }
-          ]
-      },
+      proxies: [
+          {
+              // for every request that is /api go to localhost:3000
+              context: '/api',
+              host: 'localhost',
+              port: 3000
+          }
+      ],
       livereload: {
         options: {
           // - - BEGIN :: paste in from https://github.com/drewzboto/grunt-connect-proxy
@@ -107,7 +95,6 @@ module.exports = function (grunt) {
 
                     // Serve static files.
                     options.base.forEach(function(base) {
-                        console.log('base: ', base);
                         middlewares.push(connect.static(base));
                     });
 
@@ -118,10 +105,10 @@ module.exports = function (grunt) {
                     return middlewares;
                 }
           // - - End :: paste in from https://github.com/drewzboto/grunt-connect-proxy
-            , open: true
+          , open: true,
           // --- comment out existing middle ware ---
           // ========================================
-          // , middleware: function (connect) {
+          // middleware: function (connect) {
           //   return [
           //     connect.static('.tmp'),
           //     connect().use(
@@ -131,11 +118,6 @@ module.exports = function (grunt) {
           //     connect.static(appConfig.app)
           //   ];
           // }
-
-          // , base: [
-          //     '.tmp'
-          //     , '<%= yoeman.app %>'
-          // ]
         }
       },
       test: {
@@ -418,7 +400,7 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       // add next line for development time proxies
-      'configureProxies:server2',
+      'configureProxies:server',
       'connect:livereload',
       'watch'
     ]);
@@ -433,7 +415,7 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
       // add next line for development time proxies
-      'configureProxies:server2',
+      'configureProxies:server',
     'autoprefixer',
     'connect:test',
     'karma'
