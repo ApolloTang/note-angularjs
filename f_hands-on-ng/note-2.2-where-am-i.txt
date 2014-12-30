@@ -1,0 +1,4 @@
+I am stuck in getting grunt-connect-proxy to work.
+here is solution on stackoverflow.com I am researching..
+
+http://stackoverflow.com/questions/22858205/angularjs-with-grunt-connect-to-another-server
